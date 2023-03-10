@@ -10,8 +10,8 @@
 - node v18.15.0
 
 ## サーバー構成
-[front](https://go-next-ddd.vercel.app/): Vercel 
-[backend](https://go-next-ddd-backend-4xcsvz7ola-de.a.run.app/): CloudRun
+- [front](https://go-next-ddd.vercel.app/): Vercel 
+- [backend](https://go-next-ddd-backend-4xcsvz7ola-de.a.run.app/): CloudRun
 
 ## リポジトリ階層
 ```
