@@ -9,6 +9,8 @@
         - go get github.com/asaskevich/govalidator
 - node v18.15.0
 
+## サーバー構成
+
 ## リポジトリ階層
 ```
 Backend
