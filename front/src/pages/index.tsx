@@ -14,7 +14,7 @@ const Home: NextPage = () => {
   }
 
   useEffect(() => {
-    socketRef.current = new WebSocket('ws://localhost:8080/socket')
+    socketRef.current = new WebSocket('ws://' + process.env.BACKEND_SERVER + process.env.PORT + '/socket')
     socketRef.current.onopen = function () {
       setIsConnected(true)
       console.log('Connected')
