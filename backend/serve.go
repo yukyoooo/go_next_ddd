@@ -49,7 +49,7 @@ func main() {
 	e.Use(middleware.Logger()) // ミドルウェアを設定
 
 	e.GET("/", func(c echo.Context) error { // ルートを設定
-		return c.String(http.StatusOK, "Hello, World!") // 出力
+		return c.String(http.StatusOK, "Hello, World!!") // 出力
 	})
 	e.GET("/socket", handleWebSocket)
 
