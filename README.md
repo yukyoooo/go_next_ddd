@@ -2,11 +2,6 @@
 - GoとNextJSを利用して、タスク管理システムを作成する。DDDの設計も取り入れながら実装する。
 ## 使用技術
 - go version go1.19 darwin/amd64
-    - サードパーティーパッケージ
-        - go get github.com/mattn/go-sqlite3
-        - go get "gopkg.in/go-ini/ini.v1"
-        - go get "github.com/google/uuid"
-        - go get github.com/asaskevich/govalidator
 - node v18.15.0
 
 ## サーバー構成
