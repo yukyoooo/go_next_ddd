@@ -7,6 +7,7 @@ import (
 
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
+	"github.com/yukyoooo/go_next_ddd/config"
 	"golang.org/x/net/websocket"
 )
 
@@ -53,6 +54,6 @@ func main() {
 	})
 	e.GET("/socket", handleWebSocket)
 
-	e.Logger.Fatal(e.Start(":8080")) // サーバーをポート番号8080で起動
+	e.Logger.Fatal(e.Start(config.Config.Port)) // サーバーをポート番号で起動
 
 }
