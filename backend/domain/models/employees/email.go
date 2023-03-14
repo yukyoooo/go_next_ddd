@@ -4,7 +4,7 @@ import (
 	"fmt"
 
 	"github.com/asaskevich/govalidator"
-	"github.com/yukyoooo/go_next_ddd/iterrors"
+	"github.com/yukyoooo/go_next_ddd/ierrors"
 )
 
 type Email struct {
@@ -16,7 +16,7 @@ func (e Email) Value() string {
 }
 
 func NewEmail(value string) (_ *Email, err error) {
-	defer iterrors.Wrap(&err, "email.NewEmail(%s", value)
+	defer ierrors.Wrap(&err, "email.NewEmail(%s", value)
 	email := new(Email)
 
 	if value == "" {

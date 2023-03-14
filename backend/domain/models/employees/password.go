@@ -4,7 +4,7 @@ import (
 	"crypto/sha1"
 	"fmt"
 
-	"github.com/yukyoooo/go_next_ddd/iterrors"
+	"github.com/yukyoooo/go_next_ddd/ierrors"
 )
 
 type Password struct {
@@ -12,7 +12,7 @@ type Password struct {
 }
 
 func NewPassword(value string) (_ *Password, err error) {
-	defer iterrors.Wrap(&err, "NewPassword(%s", value)
+	defer ierrors.Wrap(&err, "NewPassword(%s", value)
 	password := new(Password)
 
 	if value == "" {
