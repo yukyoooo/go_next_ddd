@@ -4,34 +4,39 @@ import (
 	"database/sql"
 	"fmt"
 	"log"
-	"net/http"
+	"time"
 
 	"github.com/labstack/echo/v4"
-	"github.com/labstack/echo/v4/middleware"
-	"github.com/yukyoooo/go_next_ddd/config"
 	"github.com/yukyoooo/go_next_ddd/domain/models"
 	employee "github.com/yukyoooo/go_next_ddd/domain/models/employees"
+	project "github.com/yukyoooo/go_next_ddd/domain/models/projects"
 	"github.com/yukyoooo/go_next_ddd/enum"
 	"golang.org/x/net/websocket"
 )
 
 func main() {
 	fmt.Println(models.Db)
-	e := echo.New()            // インスタンスを作成
-	e.Use(middleware.Logger()) // ミドルウェアを設定
+	// e := echo.New()            // インスタンスを作成
+	// e.Use(middleware.Logger()) // ミドルウェアを設定
 
-	e.GET("/", func(c echo.Context) error { // ルートを設定
-		return c.String(http.StatusOK, "Hello, World!!") // 出力
-	})
-	e.GET("/socket", handleWebSocket)
+	// e.GET("/", func(c echo.Context) error { // ルートを設定
+	// 	return c.String(http.StatusOK, "Hello, World!!") // 出力
+	// })
+	// e.GET("/socket", handleWebSocket)
 
-	e.Logger.Fatal(e.Start(config.Config.Port)) // サーバーをポート番号で起動
+	// e.Logger.Fatal(e.Start(config.Config.Port)) // サーバーをポート番号で起動
 
 
-	// err := CreateEmployee(models.Db, "taro", "yamadaa", "testtes2t@test.com", "MyP@ssw0rd", enum.Waiting)
+	// err := CreateEmployee(models.Db, "taroa", "yamadaa", "testtes241t@test.com", "MyP@ssw0rd", enum.Waiting)
 	// if err != nil {
 	// 	log.Println(err)
 	// }
+
+	newProject, err := project.NewProject("project", 1, time.Date(2022,1,20, 0, 0, 0, 0, time.Local), time.Date(2023,1,20, 0, 0, 0, 0, time.Local))
+	if err != nil {
+		log.Println(err)
+	}
+	newProject.CreateProject()
 }
 
 func CreateEmployee(Db *sql.DB, firstName string, lastName string, email string, password string, role enum.Role) (err error) {
