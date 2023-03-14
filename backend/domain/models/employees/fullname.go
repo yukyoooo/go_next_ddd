@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"regexp"
 
-	"github.com/yukyoooo/go_next_ddd/iterrors"
+	"github.com/yukyoooo/go_next_ddd/ierrors"
 )
 
 type FullName struct {
@@ -13,7 +13,7 @@ type FullName struct {
 }
 
 func NewFullName(firstName string, lastName string) (_ *FullName, err error) {
-	defer iterrors.Wrap(&err, "fullname.NewFullName(%s, %s)", firstName, lastName)
+	defer ierrors.Wrap(&err, "fullname.NewFullName(%s, %s)", firstName, lastName)
 	fullName := new(FullName)
 
 	if firstName == "" {

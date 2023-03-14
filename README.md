@@ -55,6 +55,7 @@ erDiagram
 project {
   int id PK
   varchar name
+  int sort_id
   timestamp startDate
   timestamp endDate
 }

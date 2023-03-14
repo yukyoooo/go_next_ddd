@@ -1,4 +1,4 @@
-package iterrors
+package ierrors
 
 import (
 	"fmt"
