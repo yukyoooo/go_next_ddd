@@ -15,6 +15,7 @@ var err error
 
 const (
 	tableNameEmployee = "employees"
+	tableNameProject = "projects"
 )
 
 func init() {
@@ -30,7 +31,15 @@ func init() {
 		email STRING,
 		password STRING,
 		role INTEGER
-	)`, tableNameEmployee)
-
+		)`, tableNameEmployee)
 	Db.Exec(cmdE)
+
+	cmdP := fmt.Sprintf(`CREATE TABLE IF NOT EXISTS %s(
+		id INTEGER PRIMARY KEY AUTOINCREMENT,
+        name STRING,
+        sort_id INTEGER,
+        start_date DATETIME,
+        end_date DATETIME
+		)`, tableNameProject)
+	Db.Exec(cmdP)
 }
