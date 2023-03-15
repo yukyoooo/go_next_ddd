@@ -4,7 +4,7 @@ import (
 	"log"
 	"time"
 
-	"github.com/yukyoooo/go_next_ddd/domain/models"
+	model "github.com/yukyoooo/go_next_ddd/domain/model"
 )
 
 type Project struct {
@@ -27,7 +27,7 @@ func (p *Project) CreateProject() (err error) {
         end_date
 	) values (?, ?, ?, ?)`
 
-	_, err = models.Db.Exec(cmd, p.Name, p.SortID, p.StartDate, p.EndDate)
+	_, err = model.Db.Exec(cmd, p.Name, p.SortID, p.StartDate, p.EndDate)
 	if err != nil {
 		log.Fatalln(err)
 	}
