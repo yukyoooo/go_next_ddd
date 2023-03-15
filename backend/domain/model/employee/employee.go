@@ -3,7 +3,7 @@ package employee
 import (
 	"log"
 
-	"github.com/yukyoooo/go_next_ddd/domain/models"
+	model "github.com/yukyoooo/go_next_ddd/domain/model"
 	"github.com/yukyoooo/go_next_ddd/enum"
 )
 
@@ -23,7 +23,7 @@ func (e *Employee) CreateEmployee() (err error) {
 		password,
 		role) values (?, ?, ?, ?, ?)`
 
-	_, err = models.Db.Exec(
+	_, err = model.Db.Exec(
 		cmd,
 		e.Name.firstName,
 		e.Name.lastName,
@@ -41,7 +41,7 @@ func GetEmployee(id int) (employee Employee, err error) {
 	employee = Employee{}
 	cmd := `select id, first_name, last_name, email, password, role
 	from employees where id = ?`
-	err = models.Db.QueryRow(cmd, id).Scan(
+	err = model.Db.QueryRow(cmd, id).Scan(
 		&employee.ID,
 		&employee.Name.firstName,
 		&employee.Name.lastName,
@@ -55,7 +55,7 @@ func GetEmployee(id int) (employee Employee, err error) {
 
 func (e *Employee) UpdateUser() (err error) {
 	cmd := `update employees set first_name = ?, last_name = ?, email = ?, password = ?, role = ? where id = ?`
-	_, err = models.Db.Exec(cmd, e.Name.firstName, e.Name.lastName, e.Email.value, e.Password.value, e.Role, e.ID)
+	_, err = model.Db.Exec(cmd, e.Name.firstName, e.Name.lastName, e.Email.value, e.Password.value, e.Role, e.ID)
 	if err != nil {
 		log.Fatalln(err)
 	}
@@ -64,7 +64,7 @@ func (e *Employee) UpdateUser() (err error) {
 
 func (e *Employee) DeleteEmployee() (err error) {
 	cmd := `delete from employees where id = ?`
-	_, err = models.Db.Exec(cmd, e.ID)
+	_, err = model.Db.Exec(cmd, e.ID)
 	if err != nil {
 		log.Fatalln(err)
 	}
