@@ -13,8 +13,12 @@
 Backend
 ├ config/
 ├ domain/
-│  └ model/
+│  ├ model/
 │     ├ employee/ .. 従業員ドメイン(値obj, エンティティ, ドメインサービス格納)
+│     └
+│  └ repository/
+│     ├ employee/ .. リポジトリインターフェース
+│     └
 │
 ├ enum/
 ├ ierrors/ .. エラーハンドリング
@@ -156,5 +160,6 @@ flowchart LR
 
 
 ## 参考リンク
-[Next.js と Go で WebSocket 通信を行おう【環境構築編】](https://qiita.com/1129-tame/items/39101ed81039542198dc)
-[Cloud Build を使用した Git からの継続的なデプロイ](https://cloud.google.com/run/docs/continuous-deployment-with-cloud-build?hl=ja)
+- [Next.js と Go で WebSocket 通信を行おう【環境構築編】](https://qiita.com/1129-tame/items/39101ed81039542198dc)
+- [Cloud Build を使用した Git からの継続的なデプロイ](https://cloud.google.com/run/docs/continuous-deployment-with-cloud-build?hl=ja)
+- [GoでDDDの実装参考zenn記事](https://zenn.dev/msksgm)
