@@ -13,11 +13,11 @@
 Backend
 ├ config/
 ├ domain/
-│  └ models/
+│  └ model/
 │     ├ employee/ .. 従業員ドメイン(値obj, エンティティ, ドメインサービス格納)
 │
 ├ enum/
-├ iterrors/ .. エラーハンドリング
+├ ierrors/ .. エラーハンドリング
 ├ utils/ .. log設定
 ├ README.md
 ├ config.ini
