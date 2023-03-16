@@ -25,7 +25,8 @@ func main() {
 	// e.Logger.Fatal(e.Start(config.Config.Port)) // サーバーをポート番号で起動
 
 
-	err := CreateEmployee(model.Db, "taroaa", "yamadaa", "testtes2241t@test.com", "MyP@ssw0rd", enum.Waiting)
+
+	err := CreateEmployee(model.Db, "taroaaa", "yamaaadaa", "testtes2234111t@test.com", "MyP@ssw0rd", enum.Waiting)
 	if err != nil {
 		log.Println(err)
 	}
@@ -53,16 +54,14 @@ func CreateEmployee(Db *sql.DB, firstName string, lastName string, email string,
 		return err
 	}
 
-	newEmployee, err := employee.NewEmployee(*newEmployeeName, *newEmail, *newPassword, role)
-	if err != nil {
-		return err
-	}
-	fmt.Println(newEmployee)
-
 	employeeRepository, err := employee.NewEmployeeRepository(model.Db)
 	if err != nil {
 		return err
 	}
+	newEmployee, err := employee.NewEmployee(*newEmployeeName, *newEmail, *newPassword, role)
+	if err != nil {
+		return err
+	}	
 	userService, err := employee.NewEmployeeService(employeeRepository)
 	if err != nil {
 		return err
@@ -73,10 +72,14 @@ func CreateEmployee(Db *sql.DB, firstName string, lastName string, email string,
 	}
 
 	if isExists {
-		log.Println("userservice.Exists() :既に存在する名前、もしくはメールアドレスです")
-	} else {
-		newEmployee.CreateEmployee()
+		return fmt.Errorf("userservice.Exists() :既に存在する名前、もしくはメールアドレスです")
 	}
+
+	if err := newEmployee.Save(); err != nil {
+		return err
+	}
+
+	log.Println("employee is successfully added in employees table. employee:", newEmployee)
 	return nil
 }
 

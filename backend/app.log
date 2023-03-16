@@ -1,0 +1,4 @@
+2023/03/16 01:34:33 main.go:83: employee is successfully added in employees table
+2023/03/16 01:35:06 main.go:82: employee is successfully added in employees table. employee:  &{0 {taroaa yamaaadaa} {testtes224111t@test.com} {02e2ecfa5e193f442711e5825da71c09fa7a778b} 0}
+2023/03/16 02:48:42 main.go:32: &{1 {taroaa yamadaa} {testtes2241t@test.com} {02e2ecfa5e193f442711e5825da71c09fa7a778b} 0}
+2023/03/16 02:52:00 main.go:82: employee is successfully added in employees table. employee: &{0 {taroaaa yamaaadaa} {testtes2234111t@test.com} {02e2ecfa5e193f442711e5825da71c09fa7a778b} 0}

@@ -15,41 +15,27 @@ type Employee struct {
 	Role     enum.Role
 }
 
-func (e *Employee) CreateEmployee() (err error) {
-	cmd := `insert into employees (
-		first_name,
-		last_name,
-		email,
-		password,
-		role) values (?, ?, ?, ?, ?)`
-
-	_, err = model.Db.Exec(
-		cmd,
-		e.Name.firstName,
-		e.Name.lastName,
-		e.Email.value,
-		e.Password.value,
-		e.Role)
-
+func (e *Employee) Save() (err error) {
+	employeeRepository, err := NewEmployeeRepository(model.Db)
 	if err != nil {
-		log.Fatalln(err)
+		return err
+	}
+	err = employeeRepository.Save(e)
+	if err != nil {
+		return err
 	}
 	return err
 }
 
-func GetEmployee(id int) (employee Employee, err error) {
-	employee = Employee{}
-	cmd := `select id, first_name, last_name, email, password, role
-	from employees where id = ?`
-	err = model.Db.QueryRow(cmd, id).Scan(
-		&employee.ID,
-		&employee.Name.firstName,
-		&employee.Name.lastName,
-		&employee.Email.value,
-		&employee.Password.value,
-		&employee.Role,
-	)
-
+func GetEmployee(id int) (employee *Employee, err error) {
+	employeeRepository, err := NewEmployeeRepository(model.Db)
+	if err != nil {
+		return nil, err
+	}
+	employee, err = employeeRepository.FindById(id)
+	if err != nil {
+		return nil, err
+	}
 	return employee, err
 }
 

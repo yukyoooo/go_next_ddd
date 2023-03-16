@@ -42,6 +42,7 @@ func (er *EmployeeRepository) Save(employee *Employee) (err error){
 func (er *EmployeeRepository) FindById(id int) (employee *Employee, err error) {
 	cmd := `select id, first_name, last_name, email, password, role
 	from employees where id = ?`
+	employee = new(Employee)
 	err = model.Db.QueryRow(cmd, id).Scan(
 		&employee.ID,
 		&employee.Name.firstName,
@@ -50,14 +51,16 @@ func (er *EmployeeRepository) FindById(id int) (employee *Employee, err error) {
 		&employee.Password.value,
 		&employee.Role)
 	if err != nil {
-		return nil, err
+		return employee, err
 	}
 	
 	return employee, err
 }
+
 func (ep *EmployeeRepository) Update(id int, first_name string, last_name string, email string, password string, role int) (error) {
 	return nil
 }
+
 func (ep *EmployeeRepository) Remove(id int) (error) {
 	return nil
 }
