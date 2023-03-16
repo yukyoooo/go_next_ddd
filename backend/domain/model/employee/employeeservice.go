@@ -1,43 +1,17 @@
 package employee
 
-import (
-	"database/sql"
-	"fmt"
-)
-
 type EmployeeService struct {
-	Db *sql.DB
+	employeeRepository EmployeeRepositorier
 }
 
-func NewEmployeeService(Db *sql.DB) (*EmployeeService, error) {
-	return &EmployeeService{Db: Db}, nil
+func NewEmployeeService(employeeRepository EmployeeRepositorier) (*EmployeeService, error) {
+	return &EmployeeService{employeeRepository: employeeRepository}, nil
 }
 
-func (employeeService *EmployeeService) Exists(employee *Employee) (isExists bool, err error) {
-	tx, err := employeeService.Db.Begin()
+func (es *EmployeeService) Exists(employee *Employee) (isExists bool, err error) {
+	employees, err := es.employeeRepository.FindByNameAndEmail(employee.Name.firstName, employee.Name.lastName, employee.Email.value)
 	if err != nil {
-		return
+		return false, err
 	}
-
-	defer func() {
-		switch err {
-		case nil:
-			err = tx.Commit()
-		default:
-			tx.Rollback()
-		}
-	}()
-
-	cmd := `select * from employees where (first_name = ? and last_name = ?) or email = ?`
-
-	rows, err := tx.Query(cmd, employee.Name.firstName, employee.Name.lastName, employee.Email.value)
-	if err != nil {
-		return false, fmt.Errorf("userservice.Exists(): %v", err)
-	}
-	defer rows.Close()
-
-	if rows.Next() {
-		return true, nil
-	}
-	return false, nil
+	return employees != nil, nil
 }
