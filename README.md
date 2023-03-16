@@ -14,11 +14,8 @@ Backend
 ├ config/
 ├ domain/
 │  ├ model/
-│     ├ employee/ .. 従業員ドメイン(値obj, エンティティ, ドメインサービス格納)
-│     └
-│  └ repository/
-│     ├ employee/ .. リポジトリインターフェース
-│     └
+│     ├ employee/ .. 従業員ドメイン(値obj, エンティティ, ドメインサービス、リポジトリ(インターフェース、実装)格納)
+│     └ project/
 │
 ├ enum/
 ├ ierrors/ .. エラーハンドリング
