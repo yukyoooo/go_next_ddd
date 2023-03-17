@@ -44,7 +44,7 @@ func main() {
 		log.Println(err)
 	}
 	log.Println(project1)
-	project1.SortID = 99
+	project1.SortID = 999
 	project1.Update()
 	log.Println(project1)
 }
