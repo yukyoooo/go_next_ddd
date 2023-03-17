@@ -1,5 +1,7 @@
 # ポートフォリオ作成(作成中)
 - GoとNextJSを利用して、タスク管理システムを作成する。DDDの設計も取り入れながら実装する。
+- 残タスク、課題状況は随時Issuesを更新
+
 ## 使用技術
 - go version go1.19 darwin/amd64
 - node v18.15.0
@@ -13,9 +15,10 @@
 Backend
 ├ config/
 ├ domain/
-│  ├ model/
-│     ├ employee/ .. 従業員ドメイン(値obj, エンティティ, ドメインサービス、リポジトリ(インターフェース、実装)格納)
-│     └ project/
+│  ├ model/ .. 値obj, エンティティ, ドメインサービス、リポジトリ(インターフェース、実装)格納
+│     ├ employee/ .. 従業員ドメイン
+│     └ project/ .. プロジェクトドメイン
+│  └ base.go .. テーブル作成
 │
 ├ enum/
 ├ ierrors/ .. エラーハンドリング
