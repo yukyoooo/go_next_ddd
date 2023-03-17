@@ -66,6 +66,7 @@ project {
 
 milestone {
     int id PK
+    varchar name
     timestamp startDate
     timestamp endDate
 }
