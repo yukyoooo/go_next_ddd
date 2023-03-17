@@ -20,14 +20,8 @@ func NewProject(name string, sortId int, startDate time.Time, EndDate time.Time)
 }
 
 func (p *Project) Create() (err error) {
-	cmd := `insert into projects (
-		name,
-		sort_id,
-        start_date,
-        end_date
-	) values (?, ?, ?, ?)`
-
-	_, err = model.Db.Exec(cmd, p.Name, p.SortID, p.StartDate, p.EndDate)
+	projectRepository := NewProjectRepository(model.Db)
+	err = projectRepository.Save(p)
 	if err != nil {
 		log.Fatalln(err)
 	}
@@ -35,35 +29,28 @@ func (p *Project) Create() (err error) {
 }
 
 func (p *Project) Update() (err error) {
-	cmd := `update projects set name = ?, sort_id = ?, start_date = ?, end_date = ? where id = ?`
-	_, err = model.Db.Exec(cmd, p.Name, p.SortID, p.StartDate, p.EndDate, p.ID)
-	if err != nil {
-		return err
-	}
-	return nil
+	projectRepository := NewProjectRepository(model.Db)
+    err = projectRepository.Update(p)
+    if err!= nil {
+        log.Fatalln(err)
+    }
+    return err
 }
 
 func (p *Project) Remove(id int) (err error) {
-	cmd := `delete from projects where id = ?`
-	_, err = model.Db.Exec(cmd, id)
-	if err != nil {
-		return err
-	}
-	return nil
+	projectRepository := NewProjectRepository(model.Db)
+	err = projectRepository.Remove(id)
+	if err!= nil {
+        log.Fatalln(err)
+    }
+	return err
 }
 
 func FindById(id int) (project *Project, err error) {
-	cmd := `select id, name, sort_id, start_date, end_date from projects where id = ?`
-	project = new(Project)
-	err = model.Db.QueryRow(cmd, id).Scan(
-		&project.ID,
-		&project.Name,
-		&project.SortID,
-		&project.StartDate,
-		&project.EndDate)
-	if err != nil {
-		return project, err
-	}
-
-	return project, nil
+	projectRepository := NewProjectRepository(model.Db)
+	project, err = projectRepository.FindById(id)
+	if err!= nil {
+        log.Fatalln(err)
+    }
+	return project, err
 }
