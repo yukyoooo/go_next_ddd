@@ -21,8 +21,8 @@ type EmployeeRepository struct {
 
 
 
-func NewEmployeeRepository(db *sql.DB) (*EmployeeRepository, error) {
-	return &EmployeeRepository{db: db}, nil
+func NewEmployeeRepository(db *sql.DB) (*EmployeeRepository) {
+	return &EmployeeRepository{db: db}
 }
 
 func (er *EmployeeRepository) Save(employee *Employee) (err error){
@@ -44,7 +44,7 @@ func (er *EmployeeRepository) FindById(id int) (employee *Employee, err error) {
 	from employees where id = ?`
 	employee = new(Employee)
 	err = model.Db.QueryRow(cmd, id).Scan(
-		&employee.ID,
+	&employee.ID,
 		&employee.Name.firstName,
 		&employee.Name.lastName,
 		&employee.Email.value,
@@ -57,11 +57,21 @@ func (er *EmployeeRepository) FindById(id int) (employee *Employee, err error) {
 	return employee, err
 }
 
-func (ep *EmployeeRepository) Update(id int, first_name string, last_name string, email string, password string, role int) (error) {
+func (er *EmployeeRepository) Update(employee *Employee) (err error) {
+	cmd := `update employees set first_name = ?, last_name = ?, email = ?, password = ?, role = ? where id = ?`
+	_, err = model.Db.Exec(cmd, employee.Name.firstName, employee.Name.lastName, employee.Email.value, employee.Password.value, employee.Role, employee.ID)
+	if err != nil {
+		return err
+	}
 	return nil
 }
 
-func (ep *EmployeeRepository) Remove(id int) (error) {
+func (er *EmployeeRepository) Remove(id int) (err error) {
+	cmd := `delete from employees where id = ?`
+	_, err = model.Db.Exec(cmd, id)
+	if err != nil {
+		return err
+	}
 	return nil
 }
 

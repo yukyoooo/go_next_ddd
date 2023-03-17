@@ -1,8 +1,6 @@
 package employee
 
 import (
-	"log"
-
 	model "github.com/yukyoooo/go_next_ddd/domain/model"
 	"github.com/yukyoooo/go_next_ddd/enum"
 )
@@ -15,11 +13,12 @@ type Employee struct {
 	Role     enum.Role
 }
 
+func NewEmployee(name FullName, email Email, password Password, role enum.Role) (*Employee, error) {
+	return &Employee{Name: name, Email: email, Password: password, Role: role}, nil
+}
+
 func (e *Employee) Save() (err error) {
-	employeeRepository, err := NewEmployeeRepository(model.Db)
-	if err != nil {
-		return err
-	}
+	employeeRepository := NewEmployeeRepository(model.Db)
 	err = employeeRepository.Save(e)
 	if err != nil {
 		return err
@@ -28,10 +27,7 @@ func (e *Employee) Save() (err error) {
 }
 
 func GetEmployee(id int) (employee *Employee, err error) {
-	employeeRepository, err := NewEmployeeRepository(model.Db)
-	if err != nil {
-		return nil, err
-	}
+	employeeRepository := NewEmployeeRepository(model.Db)
 	employee, err = employeeRepository.FindById(id)
 	if err != nil {
 		return nil, err
@@ -40,25 +36,21 @@ func GetEmployee(id int) (employee *Employee, err error) {
 }
 
 func (e *Employee) UpdateUser() (err error) {
-	cmd := `update employees set first_name = ?, last_name = ?, email = ?, password = ?, role = ? where id = ?`
-	_, err = model.Db.Exec(cmd, e.Name.firstName, e.Name.lastName, e.Email.value, e.Password.value, e.Role, e.ID)
+	employeeRepository := NewEmployeeRepository(model.Db)
+	err = employeeRepository.Update(e)
 	if err != nil {
-		log.Fatalln(err)
+		return err
 	}
 	return err
 }
 
 func (e *Employee) DeleteEmployee() (err error) {
-	cmd := `delete from employees where id = ?`
-	_, err = model.Db.Exec(cmd, e.ID)
+	employeeRepository := NewEmployeeRepository(model.Db)
+	err = employeeRepository.Remove(e.ID)
 	if err != nil {
-		log.Fatalln(err)
+		return err
 	}
 	return err
-}
-
-func NewEmployee(name FullName, email Email, password Password, role enum.Role) (*Employee, error) {
-	return &Employee{Name: name, Email: email, Password: password, Role: role}, nil
 }
 
 func (e *Employee) WithChangeFirstName(firstName string) (_ *FullName, err error) {
