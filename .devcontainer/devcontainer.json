@@ -21,7 +21,8 @@
 				"bpruitt-goddard.mermaid-markdown-syntax-highlighting",
 				"MS-CEINTL.vscode-language-pack-ja",
 				"Nixon.env-cmd-file-syntax",
-				"bierner.markdown-mermaid"
+				"bierner.markdown-mermaid",
+				"TabNine.tabnine-vscode"
 			]
 		}
 	}
