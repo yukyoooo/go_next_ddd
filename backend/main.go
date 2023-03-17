@@ -9,7 +9,7 @@ import (
 	"github.com/labstack/echo/v4"
 	"github.com/yukyoooo/go_next_ddd/domain/model"
 	employee "github.com/yukyoooo/go_next_ddd/domain/model/employee"
-	"github.com/yukyoooo/go_next_ddd/domain/model/project"
+	milestone "github.com/yukyoooo/go_next_ddd/domain/model/milestone"
 	"github.com/yukyoooo/go_next_ddd/enum"
 	"golang.org/x/net/websocket"
 )
@@ -34,19 +34,20 @@ func main() {
 	}
 	*/
 
-	newProject, err := project.NewProject("project", 1, time.Date(2022,1,20, 0, 0, 0, 0, time.Local), time.Date(2023,1,20, 0, 0, 0, 0, time.Local))
+	newMilestone, err := milestone.NewMilestone("milestone", time.Date(2022,1,20, 0, 0, 0, 0, time.Local), time.Date(2023,1,20, 0, 0, 0, 0, time.Local))
 	if err != nil {
 		log.Println(err)
 	}
-	newProject.Create()
-	project1, err := project.FindById(2)
+	log.Println(newMilestone)
+	newMilestone.Create()
+	newMilestone1, err := milestone.FindByID(1)
 	if err != nil {
 		log.Println(err)
 	}
-	log.Println(project1)
-	project1.SortID = 999
-	project1.Update()
-	log.Println(project1)
+	log.Println(newMilestone1)
+	newMilestone1.StartDate = time.Date(2022,1,30, 0, 0, 0, 0, time.Local)
+	newMilestone1.Update()
+	log.Println(newMilestone1)
 }
 
 func CreateEmployee(Db *sql.DB, firstName string, lastName string, email string, password string, role enum.Role) (err error) {
