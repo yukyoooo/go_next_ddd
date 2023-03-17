@@ -10,7 +10,7 @@ import (
 type EmployeeRepositorier interface {
 	Save(employee *Employee) (error)
 	FindById(id int) (*Employee, error)
-	Update(id int, first_name string, last_name string, email string, password string, role int) (error)
+	Update(employee *Employee) (error)
 	Remove(id int) (error)
 	FindByNameAndEmail(first_name string, last_name string, email string) (*Employee, error)
 }
