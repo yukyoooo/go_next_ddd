@@ -25,7 +25,7 @@ func (p *Project) Create() (err error) {
 	if err != nil {
 		log.Fatalln(err)
 	}
-	return err
+	return nil
 }
 
 func (p *Project) Update() (err error) {
@@ -37,9 +37,9 @@ func (p *Project) Update() (err error) {
     return err
 }
 
-func (p *Project) Remove(id int) (err error) {
+func (p *Project) Remove() (err error) {
 	projectRepository := NewProjectRepository(model.Db)
-	err = projectRepository.Remove(id)
+	err = projectRepository.Remove(p.ID)
 	if err!= nil {
         log.Fatalln(err)
     }

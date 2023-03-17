@@ -34,11 +34,7 @@ func (pr *ProjectRepository) Save(project *Project) (error) {
     }
 
     err = tx.Commit()
-    if err!= nil {
-        return err
-    }
-
-    return nil
+    return err
 }
 
 func (pr *ProjectRepository) FindById(id int) (*Project, error) {
@@ -62,16 +58,10 @@ func (pr *ProjectRepository) Update(project *Project) (error) {
         project.StartDate,
         project.EndDate,
         project.ID)
-    if err!= nil {
-        return err
-    }
-    return nil
+    return err
 }
 
 func (pr *ProjectRepository) Remove(id int) (error) {
 	_, err := pr.db.Exec("DELETE FROM projects WHERE id =?", id)
-    if err!= nil {
-        return err
-    }
-    return nil
+    return err
 }
