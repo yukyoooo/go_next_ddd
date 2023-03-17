@@ -4,10 +4,12 @@ import (
 	"database/sql"
 	"fmt"
 	"log"
+	"time"
 
 	"github.com/labstack/echo/v4"
 	"github.com/yukyoooo/go_next_ddd/domain/model"
 	employee "github.com/yukyoooo/go_next_ddd/domain/model/employee"
+	"github.com/yukyoooo/go_next_ddd/domain/model/project"
 	"github.com/yukyoooo/go_next_ddd/enum"
 	"golang.org/x/net/websocket"
 )
@@ -24,18 +26,27 @@ func main() {
 
 	// e.Logger.Fatal(e.Start(config.Config.Port)) // サーバーをポート番号で起動
 
-
-
+	
+	/*
 	err := CreateEmployee(model.Db, "taroaaa", "yamaaadaa", "testtes2234111t@test.com", "MyP@ssw0rd", enum.Waiting)
 	if err != nil {
 		log.Println(err)
 	}
+	*/
 
-	// newProject, err := project.NewProject("project", 1, time.Date(2022,1,20, 0, 0, 0, 0, time.Local), time.Date(2023,1,20, 0, 0, 0, 0, time.Local))
-	// if err != nil {
-	// 	log.Println(err)
-	// }
-	// newProject.CreateProject()
+	newProject, err := project.NewProject("project", 1, time.Date(2022,1,20, 0, 0, 0, 0, time.Local), time.Date(2023,1,20, 0, 0, 0, 0, time.Local))
+	if err != nil {
+		log.Println(err)
+	}
+	newProject.Create()
+	project1, err := project.FindById(2)
+	if err != nil {
+		log.Println(err)
+	}
+	log.Println(project1)
+	project1.SortID = 99
+	project1.Update()
+	log.Println(project1)
 }
 
 func CreateEmployee(Db *sql.DB, firstName string, lastName string, email string, password string, role enum.Role) (err error) {
@@ -54,10 +65,7 @@ func CreateEmployee(Db *sql.DB, firstName string, lastName string, email string,
 		return err
 	}
 
-	employeeRepository, err := employee.NewEmployeeRepository(model.Db)
-	if err != nil {
-		return err
-	}
+	employeeRepository := employee.NewEmployeeRepository(model.Db)
 	newEmployee, err := employee.NewEmployee(*newEmployeeName, *newEmail, *newPassword, role)
 	if err != nil {
 		return err
