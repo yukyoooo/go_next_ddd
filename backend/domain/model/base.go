@@ -16,6 +16,7 @@ var err error
 const (
 	tableNameEmployee = "employees"
 	tableNameProject = "projects"
+	tableNameMilestone = "milestones"
 )
 
 func init() {
@@ -42,4 +43,12 @@ func init() {
         end_date DATETIME
 		)`, tableNameProject)
 	Db.Exec(cmdP)
+
+	cmdM := fmt.Sprintf(`CREATE TABLE IF NOT EXISTS %s(
+		id INTEGER PRIMARY KEY AUTOINCREMENT,
+        name STRING,
+        start_date DATETIME,
+        end_date DATETIME
+        )`, tableNameMilestone)
+    Db.Exec(cmdM)
 }
