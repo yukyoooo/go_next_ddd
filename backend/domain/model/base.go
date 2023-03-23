@@ -17,6 +17,7 @@ const (
 	tableNameEmployee = "employees"
 	tableNameProject = "projects"
 	tableNameMilestone = "milestones"
+	tableNameTask = "tasks"
 )
 
 func init() {
@@ -51,4 +52,17 @@ func init() {
         end_date DATETIME
         )`, tableNameMilestone)
     Db.Exec(cmdM)
+
+	cmdT := fmt.Sprintf(`CREATE TABLE IF NOT EXISTS %s (
+		id INTEGER PRIMARY KEY AUTOINCREMENT,
+		project_id INTEGER,
+		milestone_id INTEGER,
+        name STRING,
+		detail STRING,
+		status INTEGER,
+		url STRING,
+		created_at DATETIME,
+		updated_at DATETIME
+        )`, tableNameTask)
+	Db.Exec(cmdT)
 }
