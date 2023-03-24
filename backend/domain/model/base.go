@@ -18,6 +18,7 @@ const (
 	tableNameProject = "projects"
 	tableNameMilestone = "milestones"
 	tableNameTask = "tasks"
+	tableNameThread = "threads"
 )
 
 func init() {
@@ -28,41 +29,60 @@ func init() {
 
 	cmdE := fmt.Sprintf(`CREATE TABLE IF NOT EXISTS %s(
 		id INTEGER PRIMARY KEY AUTOINCREMENT,
-		first_name STRING,
-		last_name STRING,
-		email STRING,
-		password STRING,
-		role INTEGER
+		first_name STRING NOT NULL,
+		last_name STRING NOT NULL,
+		email STRING NOT NULL,
+		password STRING NOT NULL,
+		role INTEGER NOT NULL,
+		created_at DATETIME TEXT NOT NULL DEFAULT (DATETIME('now', 'localtime')),
+		updated_at DATETIME TEXT NOT NULL DEFAULT (DATETIME('now', 'localtime'))
 		)`, tableNameEmployee)
 	Db.Exec(cmdE)
 
 	cmdP := fmt.Sprintf(`CREATE TABLE IF NOT EXISTS %s(
 		id INTEGER PRIMARY KEY AUTOINCREMENT,
-        name STRING,
-        sort_id INTEGER,
-        start_date DATETIME,
-        end_date DATETIME
+        name STRING NOT NULL,
+        sort_id INTEGER NOT NULL,
+        start_date DATETIME NOT NULL,
+        end_date DATETIME NOT NULL,
+		created_at DATETIME TEXT NOT NULL DEFAULT (DATETIME('now', 'localtime')),
+		updated_at DATETIME TEXT NOT NULL DEFAULT (DATETIME('now', 'localtime'))
 		)`, tableNameProject)
 	Db.Exec(cmdP)
 
 	cmdM := fmt.Sprintf(`CREATE TABLE IF NOT EXISTS %s(
 		id INTEGER PRIMARY KEY AUTOINCREMENT,
-        name STRING,
-        start_date DATETIME,
-        end_date DATETIME
+        name STRING NOT NULL,
+        start_date DATETIME	NOT NULL,
+        end_date DATETIME NOT NULL,
+		created_at DATETIME TEXT NOT NULL DEFAULT (DATETIME('now', 'localtime')),
+		updated_at DATETIME TEXT NOT NULL DEFAULT (DATETIME('now', 'localtime'))
         )`, tableNameMilestone)
     Db.Exec(cmdM)
 
 	cmdT := fmt.Sprintf(`CREATE TABLE IF NOT EXISTS %s (
 		id INTEGER PRIMARY KEY AUTOINCREMENT,
-		project_id INTEGER,
-		milestone_id INTEGER,
-        name STRING,
-		detail STRING,
-		status INTEGER,
-		url STRING,
-		created_at DATETIME,
-		updated_at DATETIME
+		project_id INTEGER NOT NULL,
+		milestone_id INTEGER NOT NULL,
+        name STRING NOT NULL,
+		detail STRING NOT NULL,
+		status INTEGER NOT NULL,
+		url STRING NOT NULL,
+		created_at DATETIME TEXT NOT NULL DEFAULT (DATETIME('now', 'localtime')),
+		updated_at DATETIME TEXT NOT NULL DEFAULT (DATETIME('now', 'localtime'))
         )`, tableNameTask)
 	Db.Exec(cmdT)
+
+	cmdTh := fmt.Sprintf(`CREATE TABLE IF NOT EXISTS %s (
+		id INTEGER PRIMARY KEY AUTOINCREMENT,
+		task_id INTEGER NOT NULL,
+		from_employee_id INTEGER NOT NULL,
+		to_employee_id INTEGER NOT NULL,
+		title STRING NOT NULL,
+		body STRING, 
+		resolution_flag BOOLEAN NOT NULL,
+		created_at DATETIME TEXT NOT NULL DEFAULT (DATETIME('now', 'localtime')),
+		updated_at DATETIME TEXT NOT NULL DEFAULT (DATETIME('now', 'localtime'))
+		)`, tableNameThread)
+	Db.Exec(cmdTh)
 }
