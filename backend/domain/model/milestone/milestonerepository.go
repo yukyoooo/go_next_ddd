@@ -30,7 +30,7 @@ func (mr *MilestoneRepository) Save(milestone *Milestone) error {
     _, err = tx.Exec(`INSERT INTO milestones (
 		name,
 		start_date,
-		end_date) values (?, ?, ?)`, milestone.Name, milestone.StartDate, milestone.EndDate)
+		end_date) values (?, ?, ?)`, milestone.Name, milestone.StartDate.Format("2006-01-02 15:04:05"), milestone.EndDate.Format("2006-01-02 15:04:05"))
     if err!= nil {
         tx.Rollback()
         return err
@@ -58,7 +58,7 @@ func (mr *MilestoneRepository) FindById(id int) (*Milestone, error) {
 }
 
 func (mr *MilestoneRepository) Update(milestone *Milestone) error {
-    _, err := mr.db.Exec("UPDATE milestones SET name=?, start_date=?, end_date=? WHERE id=?", milestone.Name, milestone.StartDate, milestone.EndDate, milestone.ID)
+    _, err := mr.db.Exec("UPDATE milestones SET name=?, start_date=?, end_date=? WHERE id=?", milestone.Name, milestone.StartDate.Format("2006-01-02 15:04:05"), milestone.EndDate.Format("2006-01-02 15:04:05"), milestone.ID)
     return err
 }
 
