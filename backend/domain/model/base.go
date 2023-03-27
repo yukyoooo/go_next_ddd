@@ -20,6 +20,7 @@ const (
 	tableNameTask = "tasks"
 	tableNameThread = "threads"
 	tableNameProjectAssignment = "project_assignments"
+	tableNameTaskAssignment = "task_assignments"
 )
 
 func init() {
@@ -95,4 +96,13 @@ func init() {
 		updated_at DATETIME TEXT NOT NULL DEFAULT (DATETIME('now', 'localtime'))
 		)`, tableNameProjectAssignment)
 	Db.Exec(cmdPa)
+
+	cmdTa := fmt.Sprintf(`CREATE TABLE IF NOT EXISTS %s (
+		id INTEGER PRIMARY KEY AUTOINCREMENT,
+		task_id INTEGER NOT NULL,
+		employee_id INTEGER NOT NULL,
+		created_at DATETIME TEXT NOT NULL DEFAULT (DATETIME('now', 'localtime')),
+		updated_at DATETIME TEXT NOT NULL DEFAULT (DATETIME('now', 'localtime'))
+		)`, tableNameTaskAssignment)
+	Db.Exec(cmdTa)
 }
