@@ -16,8 +16,6 @@ Backend
 ├ config/
 ├ domain/
 │  ├ model/ .. 値obj, エンティティ, ドメインサービス、リポジトリ(インターフェース、実装)格納
-│     ├ employee/ .. 従業員ドメイン
-│     └ project/ .. プロジェクトドメイン
 │  └ base.go .. テーブル作成
 │
 ├ enum/
