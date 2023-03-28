@@ -1,16 +1,12 @@
 package main
 
 import (
-	"database/sql"
 	"fmt"
 	"log"
-	"time"
 
 	"github.com/labstack/echo/v4"
+	application "github.com/yukyoooo/go_next_ddd/application"
 	"github.com/yukyoooo/go_next_ddd/domain/model"
-	employee "github.com/yukyoooo/go_next_ddd/domain/model/employee"
-	milestone "github.com/yukyoooo/go_next_ddd/domain/model/milestone"
-	"github.com/yukyoooo/go_next_ddd/enum"
 	"golang.org/x/net/websocket"
 )
 
@@ -34,63 +30,13 @@ func main() {
 	}
 	*/
 
-	newMilestone, err := milestone.NewMilestone("milestone", time.Date(2022,1,20, 0, 0, 0, 0, time.Local), time.Date(2023,1,20, 0, 0, 0, 0, time.Local))
+	err := application.RegisterEmployeeService("taro", "yamada", "test@example.com", "MyP@ssw0rd", 1);
 	if err != nil {
 		log.Println(err)
 	}
-	log.Println(newMilestone)
-	newMilestone.Create()
-	newMilestone1, err := milestone.FindByID(1)
-	if err != nil {
-		log.Println(err)
-	}
-	log.Println(newMilestone1)
-	newMilestone1.StartDate = time.Date(2022,1,30, 0, 0, 0, 0, time.Local)
-	newMilestone1.Update()
-	log.Println(newMilestone1)
 }
 
-func CreateEmployee(Db *sql.DB, firstName string, lastName string, email string, password string, role enum.Role) (err error) {
-	newEmployeeName, err := employee.NewFullName(firstName, lastName)
-	if err != nil {
-		return err
-	}
 
-	newEmail, err := employee.NewEmail(email)
-	if err != nil {
-		return err
-	}
-
-	newPassword, err := employee.NewPassword(password)
-	if err != nil {
-		return err
-	}
-
-	employeeRepository := employee.NewEmployeeRepository(model.Db)
-	newEmployee, err := employee.NewEmployee(*newEmployeeName, *newEmail, *newPassword, role)
-	if err != nil {
-		return err
-	}	
-	userService, err := employee.NewEmployeeService(employeeRepository)
-	if err != nil {
-		return err
-	}
-	isExists, err := userService.Exists(newEmployee)
-	if err != nil {
-		return err
-	}
-
-	if isExists {
-		return fmt.Errorf("userservice.Exists() :既に存在する名前、もしくはメールアドレスです")
-	}
-
-	if err := newEmployee.Save(); err != nil {
-		return err
-	}
-
-	log.Println("employee is successfully added in employees table. employee:", newEmployee)
-	return nil
-}
 
 func handleWebSocket(c echo.Context) error {
 	log.Println("Serving at localhost:8000...")
