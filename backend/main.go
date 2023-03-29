@@ -23,14 +23,6 @@ func main() {
 
 	// e.Logger.Fatal(e.Start(config.Config.Port)) // サーバーをポート番号で起動
 
-	
-	/*
-	err := CreateEmployee(model.Db, "taroaaa", "yamaaadaa", "testtes2234111t@test.com", "MyP@ssw0rd", enum.Waiting)
-	if err != nil {
-		log.Println(err)
-	}
-	*/
-
 	err := application.RegisterEmployeeService("taro", "yamada", "test@example.com", "MyP@ssw0rd", 1);
 	if err != nil {
 		log.Println(err)
