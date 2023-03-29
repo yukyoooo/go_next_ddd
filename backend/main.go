@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"log"
+	"time"
 
 	"github.com/labstack/echo/v4"
 	application "github.com/yukyoooo/go_next_ddd/application"
@@ -31,6 +32,11 @@ func main() {
 	*/
 
 	err := application.RegisterEmployeeService("taro", "yamada", "test@example.com", "MyP@ssw0rd", 1);
+	if err != nil {
+		log.Println(err)
+	}
+
+	err = application.RegisterProjectService(1, "test project", 1, time.Now(), time.Now())
 	if err != nil {
 		log.Println(err)
 	}

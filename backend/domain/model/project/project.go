@@ -19,13 +19,13 @@ func NewProject(name string, sortId int, startDate time.Time, EndDate time.Time)
 	return &Project{Name: name, SortID: sortId, StartDate: startDate, EndDate: EndDate}, nil
 }
 
-func (p *Project) Create() (err error) {
+func (p *Project) Create() (project *Project, err error) {
 	projectRepository := NewProjectRepository(model.Db)
-	err = projectRepository.Save(p)
+	projefct, err := projectRepository.Save(p)
 	if err != nil {
 		log.Fatalln(err)
 	}
-	return nil
+	return projefct, nil
 }
 
 func (p *Project) Update() (err error) {
