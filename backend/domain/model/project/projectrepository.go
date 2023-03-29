@@ -17,24 +17,34 @@ func NewProjectRepository(db *sql.DB) *ProjectRepository {
     return &ProjectRepository{db: db}
 }
 
-func (pr *ProjectRepository) Save(project *Project) (error) {
-	tx, err := pr.db.Begin()
-    if err!= nil {
-        return err
+func (pr *ProjectRepository) Save(project *Project) (*Project, error) {
+    tx, err := pr.db.Begin()
+    if err != nil {
+        return nil, err
     }
 
     _, err = tx.Exec(`INSERT INTO projects (
-		name,
-		sort_id,
-		start_date,
-		end_date) values (?, ?, ?, ?)`, project.Name, project.SortID, project.StartDate, project.EndDate)
-    if err!= nil {
+        name,
+        sort_id,
+        start_date,
+        end_date) values (?, ?, ?, ?)`, project.Name, project.SortID, project.StartDate, project.EndDate)
+    if err != nil {
         tx.Rollback()
-        return err
+        return nil, err
     }
 
     err = tx.Commit()
-    return err
+    if err != nil {
+        return nil, err
+    }
+
+    err = pr.db.QueryRow("SELECT id FROM projects order by id desc limit 1").Scan(
+        &project.ID)
+    if err != nil {
+        return nil, err
+    }
+    
+    return project, nil
 }
 
 func (pr *ProjectRepository) FindById(id int) (*Project, error) {

@@ -14,7 +14,7 @@ func RegisterProjectService(employeeId int, name string, sortId int, startDate t
 		return err
 	}
 
-	err = newProject.Create()
+	newProject, err = newProject.Create()
 	if err != nil {
 		return err 
 	}
@@ -23,6 +23,7 @@ func RegisterProjectService(employeeId int, name string, sortId int, startDate t
 	if err != nil {
 		return err
 	}
+
 
 	err = newPAssignment.Create()
 	if err != nil {
