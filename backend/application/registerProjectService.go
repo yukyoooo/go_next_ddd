@@ -8,8 +8,8 @@ import (
 	projectassignment "github.com/yukyoooo/go_next_ddd/domain/model/projectAssignment"
 )
 
-func RegisterProjectService(employeeId int, name string, sortId int, startDate time.Time, EndDate time.Time) (error){
-	newProject, err := project.NewProject(name, sortId, startDate, EndDate)
+func RegisterProjectService(employeeId int, name string, startDate time.Time, EndDate time.Time) (error){
+	newProject, err := project.NewProject(name, startDate, EndDate)
 	if err != nil {
 		return err
 	}
