@@ -54,6 +54,7 @@ func init() {
 
 	cmdM := fmt.Sprintf(`CREATE TABLE IF NOT EXISTS %s(
 		id INTEGER PRIMARY KEY AUTOINCREMENT,
+		project_id INTEGER NOT NULL,
         name STRING NOT NULL,
         start_date DATETIME	NOT NULL,
         end_date DATETIME NOT NULL,

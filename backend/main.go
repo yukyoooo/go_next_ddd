@@ -23,12 +23,17 @@ func main() {
 
 	// e.Logger.Fatal(e.Start(config.Config.Port)) // サーバーをポート番号で起動
 
-	err := application.RegisterEmployeeService("taro", "yamada", "test@example.com", "MyP@ssw0rd", 1);
+	err := application.RegisterEmployeeService("taro", "yamadaaaaaaaaa", "test2222@example.com", "MyP@ssw0rd", 1);
 	if err != nil {
 		log.Println(err)
 	}
 
-	err = application.RegisterProjectService(1, "test project", 1, time.Now(), time.Now())
+	err = application.RegisterProjectService(1, "test project2",time.Now(), time.Now())
+	if err != nil {
+		log.Println(err)
+	}
+
+	err = application.RegisterMilestoneService(1, "test milestone2",time.Now(), time.Now())
 	if err != nil {
 		log.Println(err)
 	}
