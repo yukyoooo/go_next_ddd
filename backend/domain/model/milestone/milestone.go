@@ -10,12 +10,13 @@ import (
 
 type Milestone struct {
 	ID          int
+    ProjectID   int
 	Name        string
 	StartDate   time.Time
 	EndDate     time.Time
 }
 
-func NewMilestone(name string, startDate time.Time, endDate time.Time) (*Milestone, error) {
+func NewMilestone(projectId int, name string, startDate time.Time, endDate time.Time) (*Milestone, error) {
     if name == "" {
         return nil, ierrors.ErrInvalidName
     }
@@ -29,6 +30,7 @@ func NewMilestone(name string, startDate time.Time, endDate time.Time) (*Milesto
     }
 
     return &Milestone{
+        ProjectID:   projectId,
         Name:        name,
         StartDate:   startDate,
         EndDate:     endDate,

@@ -15,8 +15,13 @@ type Project struct {
 	EndDate time.Time
 }
 
-func NewProject(name string, sortId int, startDate time.Time, EndDate time.Time) (*Project, error) {
-	return &Project{Name: name, SortID: sortId, StartDate: startDate, EndDate: EndDate}, nil
+func NewProject(name string, startDate time.Time, EndDate time.Time) (*Project, error) {
+	projectRepository := NewProjectRepository(model.Db)
+	sortId, err := projectRepository.GetLastSortId()
+	if err != nil {
+		log.Fatalln(err)
+	}
+	return &Project{Name: name, SortID: sortId + 1, StartDate: startDate, EndDate: EndDate}, nil
 }
 
 func (p *Project) Create() (project *Project, err error) {

@@ -7,6 +7,7 @@ type ProjectRepositorier interface {
 	FindById(id int) (*Project, error)
 	Update(project *Project) (error)
 	Remove(id int) (error)
+    GetLastSortId() (int, error)
 }
 
 type ProjectRepository struct {
@@ -74,4 +75,17 @@ func (pr *ProjectRepository) Update(project *Project) (error) {
 func (pr *ProjectRepository) Remove(id int) (error) {
 	_, err := pr.db.Exec("DELETE FROM projects WHERE id =?", id)
     return err
+}
+
+func (pr *ProjectRepository) GetLastSortId() (int, error) {
+    var sortId int
+    err := pr.db.QueryRow("SELECT sort_id FROM projects order by sort_id desc limit 1").Scan(&sortId)
+    if err != nil {
+        if err == sql.ErrNoRows {
+            return 1, nil
+        }else{
+            return 1, err
+        }
+    }
+    return sortId, nil
 }
