@@ -1,15 +1,18 @@
 package main
 
 import (
+	"flag"
 	"fmt"
 	"log"
-	"time"
 
 	"github.com/labstack/echo/v4"
-	application "github.com/yukyoooo/go_next_ddd/application"
+	"github.com/yukyoooo/go_next_ddd/application"
 	"github.com/yukyoooo/go_next_ddd/domain/model"
+	"github.com/yukyoooo/go_next_ddd/domain/model/employee"
 	"golang.org/x/net/websocket"
 )
+
+var command = flag.String("usecase", "", "usercase of application")
 
 func main() {
 	fmt.Println(model.Db)
@@ -23,23 +26,27 @@ func main() {
 
 	// e.Logger.Fatal(e.Start(config.Config.Port)) // サーバーをポート番号で起動
 
-	err := application.RegisterEmployeeService("taro", "yamadaaaaaaaaa", "test2222@example.com", "MyP@ssw0rd", 1);
+	employeeRepository, err := employee.NewEmployeeRepository(model.Db)
 	if err != nil {
-		log.Println(err)
+		log.Fatal(err)
 	}
-
-	err = application.RegisterProjectService(1, "test project2",time.Now(), time.Now())
+	employeeService, err := employee.NewEmployeeService(employeeRepository)
 	if err != nil {
-		log.Println(err)
+		log.Fatal(err)
 	}
+	employeeApplicationService := application.NewEmployeeApplicationService(employeeRepository, *employeeService)
 
-	err = application.RegisterMilestoneService(1, "test milestone2",time.Now(), time.Now())
-	if err != nil {
-		log.Println(err)
+	flag.Parse()
+	log.Println(*command) //go run main.go -usecase=register
+	switch *command {
+	case "register":
+		if err := employeeApplicationService.Register("yukyooowoaaa", "yukyoooo", "test32@examplo.com", "password", 1); err != nil {
+			log.Println(err)
+		}
+	default:
+		log.Printf("%s is not command. choose in ('register', 'get', 'update', 'delete')", *command)
 	}
 }
-
-
 
 func handleWebSocket(c echo.Context) error {
 	log.Println("Serving at localhost:8000...")

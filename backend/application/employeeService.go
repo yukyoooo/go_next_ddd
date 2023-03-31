@@ -4,12 +4,23 @@ import (
 	"fmt"
 	"log"
 
-	"github.com/yukyoooo/go_next_ddd/domain/model"
 	"github.com/yukyoooo/go_next_ddd/domain/model/employee"
 	"github.com/yukyoooo/go_next_ddd/enum"
 )
 
-func RegisterEmployeeService(firstName string, lastName string, email string, password string, role int) (error) {
+type EmployeeApplicationService struct {
+	employeeRepository employee.EmployeeRepositorier
+	employeeService    employee.EmployeeService
+}
+
+func NewEmployeeApplicationService(employeeRepository employee.EmployeeRepositorier, employeeService employee.EmployeeService) *EmployeeApplicationService {
+	return &EmployeeApplicationService{
+		employeeRepository: employeeRepository,
+		employeeService:    employeeService,
+	}
+}
+
+func (eas *EmployeeApplicationService) Register(firstName string, lastName string, email string, password string, role int) error {
 	newEmployeeName, err := employee.NewFullName(firstName, lastName)
 	if err != nil {
 		return err
@@ -25,16 +36,12 @@ func RegisterEmployeeService(firstName string, lastName string, email string, pa
 		return err
 	}
 
-	employeeRepository := employee.NewEmployeeRepository(model.Db)
 	newEmployee, err := employee.NewEmployee(*newEmployeeName, *newEmail, *newPassword, enum.Role(role))
 	if err != nil {
 		return err
-	}	
-	userService, err := employee.NewEmployeeService(employeeRepository)
-	if err != nil {
-		return err
 	}
-	isExists, err := userService.Exists(newEmployee)
+
+	isExists, err := eas.employeeService.Exists(newEmployee)
 	if err != nil {
 		return err
 	}
@@ -43,7 +50,7 @@ func RegisterEmployeeService(firstName string, lastName string, email string, pa
 		return fmt.Errorf("userservice.Exists() :既に存在する名前、もしくはメールアドレスです")
 	}
 
-	if err := newEmployee.Save(); err != nil {
+	if err := eas.employeeRepository.Save(newEmployee); err != nil {
 		return err
 	}
 
