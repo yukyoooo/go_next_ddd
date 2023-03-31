@@ -1,15 +1,24 @@
 package main
 
 import (
+	"flag"
 	"fmt"
 	"log"
 	"time"
 
 	"github.com/labstack/echo/v4"
-	application "github.com/yukyoooo/go_next_ddd/application"
+	"github.com/yukyoooo/go_next_ddd/application"
 	"github.com/yukyoooo/go_next_ddd/domain/model"
+	"github.com/yukyoooo/go_next_ddd/domain/model/employee"
+	"github.com/yukyoooo/go_next_ddd/domain/model/milestone"
+	"github.com/yukyoooo/go_next_ddd/domain/model/project"
+	projectassignment "github.com/yukyoooo/go_next_ddd/domain/model/projectAssignment"
+	"github.com/yukyoooo/go_next_ddd/domain/model/task"
+	taskassignment "github.com/yukyoooo/go_next_ddd/domain/model/taskAssignment"
 	"golang.org/x/net/websocket"
 )
+
+var command = flag.String("usecase", "", "usercase of application")
 
 func main() {
 	fmt.Println(model.Db)
@@ -23,23 +32,63 @@ func main() {
 
 	// e.Logger.Fatal(e.Start(config.Config.Port)) // サーバーをポート番号で起動
 
-	err := application.RegisterEmployeeService("taro", "yamadaaaaaaaaa", "test2222@example.com", "MyP@ssw0rd", 1);
+	employeeRepository, err := employee.NewEmployeeRepository(model.Db)
 	if err != nil {
+		log.Fatal(err)
+	}
+	employeeService, err := employee.NewEmployeeService(employeeRepository)
+	if err != nil {
+		log.Fatal(err)
+	}
+	employeeApplicationService := application.NewEmployeeApplicationService(employeeRepository, *employeeService)
+
+	flag.Parse()
+	log.Println(*command) //go run main.go -usecase=register
+	switch *command {
+	case "register":
+		if err := employeeApplicationService.Register("yukyooowaoaaaa", "yukyoooo", "test32a2@examplo.com", "password", 1); err != nil {
+			log.Println(err)
+		}
+	default:
+		log.Printf("%s is not command. choose in ('register', 'get', 'update', 'delete')", *command)
+	}
+
+	projectRepository, err := project.NewProjectRepository(model.Db)
+	if err != nil {
+		log.Fatal(err)
+	}
+	projectAssignmentRepository, err := projectassignment.NewProjectAssignmentRepository(model.Db)
+	if err != nil {
+		log.Fatal(err)
+	}
+	projectApplicationService := application.NewProjectApplicationService(projectRepository, projectAssignmentRepository)
+	if err := projectApplicationService.Create(2, "project", time.Now(), time.Now()); err != nil {
 		log.Println(err)
 	}
 
-	err = application.RegisterProjectService(1, "test project2",time.Now(), time.Now())
+	milestoneRepository, err := milestone.NewMilestoneRepository(model.Db)
 	if err != nil {
+		log.Fatal(err)
+	}
+	milestoneApplicationService := application.NewMilestoneApplicationService(milestoneRepository)
+	if err := milestoneApplicationService.Create(1, "milestone", time.Now(), time.Now()); err != nil {
 		log.Println(err)
 	}
 
-	err = application.RegisterMilestoneService(1, "test milestone2",time.Now(), time.Now())
+	taskRepository, err := task.NewTaskRepository(model.Db)
 	if err != nil {
+		log.Fatal(err)
+	}
+	taskAssignmentRepository, err := taskassignment.NewTaskAssignmentRepository(model.Db)
+	if err != nil {
+		log.Fatal(err)
+	}
+	taskApplicationService := application.NewTaskApplicationService(taskRepository, taskAssignmentRepository)
+	if err := taskApplicationService.Create(1, 1, 1, "task", "taskDetail", 1, "testtest.com"); err != nil {
 		log.Println(err)
 	}
+
 }
-
-
 
 func handleWebSocket(c echo.Context) error {
 	log.Println("Serving at localhost:8000...")

@@ -8,10 +8,10 @@ import (
 )
 
 type EmployeeRepositorier interface {
-	Save(employee *Employee) (error)
+	Save(employee *Employee) error
 	FindById(id int) (*Employee, error)
-	Update(employee *Employee) (error)
-	Remove(id int) (error)
+	Update(employee *Employee) error
+	Remove(id int) error
 	FindByNameAndEmail(first_name string, last_name string, email string) (*Employee, error)
 }
 
@@ -19,13 +19,11 @@ type EmployeeRepository struct {
 	db *sql.DB
 }
 
-
-
-func NewEmployeeRepository(db *sql.DB) (*EmployeeRepository) {
-	return &EmployeeRepository{db: db}
+func NewEmployeeRepository(db *sql.DB) (*EmployeeRepository, error) {
+	return &EmployeeRepository{db: db}, nil
 }
 
-func (er *EmployeeRepository) Save(employee *Employee) (err error){
+func (er *EmployeeRepository) Save(employee *Employee) (err error) {
 	cmd := `insert into employees (
 		first_name,
 		last_name,
@@ -44,7 +42,7 @@ func (er *EmployeeRepository) FindById(id int) (employee *Employee, err error) {
 	from employees where id = ?`
 	employee = new(Employee)
 	err = model.Db.QueryRow(cmd, id).Scan(
-	&employee.ID,
+		&employee.ID,
 		&employee.Name.firstName,
 		&employee.Name.lastName,
 		&employee.Email.value,
@@ -53,7 +51,7 @@ func (er *EmployeeRepository) FindById(id int) (employee *Employee, err error) {
 	if err != nil {
 		return employee, err
 	}
-	
+
 	return employee, err
 }
 

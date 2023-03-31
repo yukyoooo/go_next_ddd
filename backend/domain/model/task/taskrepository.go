@@ -11,14 +11,15 @@ type TaskRepositorier interface {
 	FindById(id int) (*Task, error)
 	Update(task *Task) error
 	Remove(id int) error
+	GetLastId() (int, error)
 }
 
 type TaskRepository struct {
 	db *sql.DB
 }
 
-func NewTaskRepository(db *sql.DB) *TaskRepository {
-	return &TaskRepository{db}
+func NewTaskRepository(db *sql.DB) (*TaskRepository, error) {
+	return &TaskRepository{db}, nil
 }
 
 func (tr *TaskRepository) Save(task *Task) error {
@@ -108,4 +109,17 @@ func (tr *TaskRepository) Update(task *Task) error {
 func (tr *TaskRepository) Remove(id int) error {
 	_, err := tr.db.Exec("DELETE FROM tasks WHERE id=?", id)
 	return err
+}
+
+func (tr *TaskRepository) GetLastId() (int, error) {
+	var id int
+	err := tr.db.QueryRow("SELECT id FROM tasks ORDER BY id DESC LIMIT 1").Scan(&id)
+	if err != nil {
+		if err == sql.ErrNoRows {
+			return 1, nil
+		} else {
+			return 1, err
+		}
+	}
+	return id, nil
 }
