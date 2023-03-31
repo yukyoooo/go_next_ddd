@@ -13,6 +13,8 @@ import (
 	"github.com/yukyoooo/go_next_ddd/domain/model/milestone"
 	"github.com/yukyoooo/go_next_ddd/domain/model/project"
 	projectassignment "github.com/yukyoooo/go_next_ddd/domain/model/projectAssignment"
+	"github.com/yukyoooo/go_next_ddd/domain/model/task"
+	taskassignment "github.com/yukyoooo/go_next_ddd/domain/model/taskAssignment"
 	"golang.org/x/net/websocket"
 )
 
@@ -44,7 +46,7 @@ func main() {
 	log.Println(*command) //go run main.go -usecase=register
 	switch *command {
 	case "register":
-		if err := employeeApplicationService.Register("yukyooowoaaa", "yukyoooo", "test32@examplo.com", "password", 1); err != nil {
+		if err := employeeApplicationService.Register("yukyooowaoaaaa", "yukyoooo", "test32a2@examplo.com", "password", 1); err != nil {
 			log.Println(err)
 		}
 	default:
@@ -60,7 +62,7 @@ func main() {
 		log.Fatal(err)
 	}
 	projectApplicationService := application.NewProjectApplicationService(projectRepository, projectAssignmentRepository)
-	if err := projectApplicationService.Create(1, "project", time.Now(), time.Now()); err != nil {
+	if err := projectApplicationService.Create(2, "project", time.Now(), time.Now()); err != nil {
 		log.Println(err)
 	}
 
@@ -72,6 +74,20 @@ func main() {
 	if err := milestoneApplicationService.Create(1, "milestone", time.Now(), time.Now()); err != nil {
 		log.Println(err)
 	}
+
+	taskRepository, err := task.NewTaskRepository(model.Db)
+	if err != nil {
+		log.Fatal(err)
+	}
+	taskAssignmentRepository, err := taskassignment.NewTaskAssignmentRepository(model.Db)
+	if err != nil {
+		log.Fatal(err)
+	}
+	taskApplicationService := application.NewTaskApplicationService(taskRepository, taskAssignmentRepository)
+	if err := taskApplicationService.Create(1, 1, 1, "task", "taskDetail", 1, "testtest.com"); err != nil {
+		log.Println(err)
+	}
+
 }
 
 func handleWebSocket(c echo.Context) error {

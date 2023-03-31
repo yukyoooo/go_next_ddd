@@ -12,8 +12,8 @@ type TaskAssignmentRepository struct {
 	db *sql.DB
 }
 
-func NewTaskAssignmentRepository(db *sql.DB) *TaskAssignmentRepository {
-	return &TaskAssignmentRepository{db: db}
+func NewTaskAssignmentRepository(db *sql.DB) (*TaskAssignmentRepository, error) {
+	return &TaskAssignmentRepository{db: db}, nil
 }
 
 func (tar *TaskAssignmentRepository) Save(taskAssignment *TaskAssignment) error {
