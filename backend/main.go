@@ -4,11 +4,15 @@ import (
 	"flag"
 	"fmt"
 	"log"
+	"time"
 
 	"github.com/labstack/echo/v4"
 	"github.com/yukyoooo/go_next_ddd/application"
 	"github.com/yukyoooo/go_next_ddd/domain/model"
 	"github.com/yukyoooo/go_next_ddd/domain/model/employee"
+	"github.com/yukyoooo/go_next_ddd/domain/model/milestone"
+	"github.com/yukyoooo/go_next_ddd/domain/model/project"
+	projectassignment "github.com/yukyoooo/go_next_ddd/domain/model/projectAssignment"
 	"golang.org/x/net/websocket"
 )
 
@@ -45,6 +49,28 @@ func main() {
 		}
 	default:
 		log.Printf("%s is not command. choose in ('register', 'get', 'update', 'delete')", *command)
+	}
+
+	projectRepository, err := project.NewProjectRepository(model.Db)
+	if err != nil {
+		log.Fatal(err)
+	}
+	projectAssignmentRepository, err := projectassignment.NewProjectAssignmentRepository(model.Db)
+	if err != nil {
+		log.Fatal(err)
+	}
+	projectApplicationService := application.NewProjectApplicationService(projectRepository, projectAssignmentRepository)
+	if err := projectApplicationService.Create(1, "project", time.Now(), time.Now()); err != nil {
+		log.Println(err)
+	}
+
+	milestoneRepository, err := milestone.NewMilestoneRepository(model.Db)
+	if err != nil {
+		log.Fatal(err)
+	}
+	milestoneApplicationService := application.NewMilestoneApplicationService(milestoneRepository)
+	if err := milestoneApplicationService.Create(1, "milestone", time.Now(), time.Now()); err != nil {
+		log.Println(err)
 	}
 }
 

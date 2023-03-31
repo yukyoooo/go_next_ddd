@@ -14,8 +14,8 @@ type ProjectAssignmentRepository struct {
 	db *sql.DB
 }
 
-func NewProjectAssignmentRepository(db *sql.DB) *ProjectAssignmentRepository {
-	return &ProjectAssignmentRepository{db: db}
+func NewProjectAssignmentRepository(db *sql.DB) (*ProjectAssignmentRepository, error) {
+	return &ProjectAssignmentRepository{db: db}, nil
 }
 
 func (par *ProjectAssignmentRepository) Save(projectAssignment *ProjectAssignment) error {
