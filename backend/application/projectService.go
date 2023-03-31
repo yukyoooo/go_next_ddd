@@ -22,6 +22,9 @@ func NewProjectApplicationService(projectRepository project.ProjectRepositorier,
 
 func (pas *ProjectApplicationService) Create(employeeId int, name string, startDate time.Time, EndDate time.Time) error {
 	sortId, err := pas.projectRepository.GetLastSortId()
+	if err != nil {
+		return err
+	}
 
 	newProject, err := project.NewProject(sortId, name, startDate, EndDate)
 	if err != nil {
@@ -32,7 +35,12 @@ func (pas *ProjectApplicationService) Create(employeeId int, name string, startD
 		return err
 	}
 
-	newPAssignment, err := projectassignment.NewProjectAssignment(newProject.ID, employeeId)
+	projectId, err := pas.projectRepository.GetLastId()
+	if err != nil {
+		return err
+	}
+
+	newPAssignment, err := projectassignment.NewProjectAssignment(projectId, employeeId)
 	if err != nil {
 		return err
 	}

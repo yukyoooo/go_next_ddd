@@ -8,6 +8,7 @@ type ProjectRepositorier interface {
 	Update(project *Project) error
 	Remove(id int) error
 	GetLastSortId() (int, error)
+	GetLastId() (int, error)
 }
 
 type ProjectRepository struct {
@@ -35,12 +36,6 @@ func (pr *ProjectRepository) Save(project *Project) error {
 	}
 
 	err = tx.Commit()
-	if err != nil {
-		return err
-	}
-
-	err = pr.db.QueryRow("SELECT id FROM projects order by id desc limit 1").Scan(
-		&project.ID)
 	if err != nil {
 		return err
 	}
@@ -87,5 +82,18 @@ func (pr *ProjectRepository) GetLastSortId() (int, error) {
 			return 1, err
 		}
 	}
-	return sortId, nil
+	return sortId + 1, nil
+}
+
+func (pr *ProjectRepository) GetLastId() (int, error) {
+	var id int
+	err := pr.db.QueryRow("SELECT id FROM projects order by id desc limit 1").Scan(&id)
+	if err != nil {
+		if err == sql.ErrNoRows {
+			return 1, nil
+		} else {
+			return 1, err
+		}
+	}
+	return id, nil
 }
