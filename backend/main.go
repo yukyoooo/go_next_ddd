@@ -10,7 +10,6 @@ import (
 	"github.com/yukyoooo/go_next_ddd/application"
 	"github.com/yukyoooo/go_next_ddd/domain/model"
 	"github.com/yukyoooo/go_next_ddd/domain/model/employee"
-	"github.com/yukyoooo/go_next_ddd/domain/model/milestone"
 	"github.com/yukyoooo/go_next_ddd/domain/model/project"
 	projectassignment "github.com/yukyoooo/go_next_ddd/domain/model/projectAssignment"
 	"github.com/yukyoooo/go_next_ddd/domain/model/task"
@@ -67,7 +66,7 @@ func main() {
 		log.Println(err)
 	}
 
-	milestoneRepository, err := milestone.NewMilestoneRepository(model.Db)
+	milestoneRepository, err := repository.NewMilestoneRepository(model.Db)
 	if err != nil {
 		log.Fatal(err)
 	}
