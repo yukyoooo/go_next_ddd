@@ -12,14 +12,16 @@
 
 ## リポジトリ階層
 ```
-Backend
+Backend 
+├ application/ .. アプリケーションサービス
 ├ config/
 ├ domain/
-│  ├ model/ .. 値obj, エンティティ, ドメインサービス、リポジトリ(インターフェース、実装)格納
+│  ├ model/ .. 値obj, エンティティ, ドメインサービス、リポジトリ(インターフェース)格納
 │  └ base.go .. テーブル作成
-│
 ├ enum/
 ├ ierrors/ .. エラーハンドリング
+├ infrastructure/ .. インフラ層
+│  ├ repository/ .. リポジトリ（実装）
 ├ utils/ .. log設定
 ├ README.md
 ├ config.ini

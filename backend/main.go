@@ -10,11 +10,7 @@ import (
 	"github.com/yukyoooo/go_next_ddd/application"
 	"github.com/yukyoooo/go_next_ddd/domain/model"
 	"github.com/yukyoooo/go_next_ddd/domain/model/employee"
-	"github.com/yukyoooo/go_next_ddd/domain/model/milestone"
-	"github.com/yukyoooo/go_next_ddd/domain/model/project"
-	projectassignment "github.com/yukyoooo/go_next_ddd/domain/model/projectAssignment"
-	"github.com/yukyoooo/go_next_ddd/domain/model/task"
-	taskassignment "github.com/yukyoooo/go_next_ddd/domain/model/taskAssignment"
+	"github.com/yukyoooo/go_next_ddd/infrastructure/repository"
 	"golang.org/x/net/websocket"
 )
 
@@ -32,7 +28,7 @@ func main() {
 
 	// e.Logger.Fatal(e.Start(config.Config.Port)) // サーバーをポート番号で起動
 
-	employeeRepository, err := employee.NewEmployeeRepository(model.Db)
+	employeeRepository, err := repository.NewEmployeeRepository(model.Db)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -53,11 +49,11 @@ func main() {
 		log.Printf("%s is not command. choose in ('register', 'get', 'update', 'delete')", *command)
 	}
 
-	projectRepository, err := project.NewProjectRepository(model.Db)
+	projectRepository, err := repository.NewProjectRepository(model.Db)
 	if err != nil {
 		log.Fatal(err)
 	}
-	projectAssignmentRepository, err := projectassignment.NewProjectAssignmentRepository(model.Db)
+	projectAssignmentRepository, err := repository.NewProjectAssignmentRepository(model.Db)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -66,7 +62,7 @@ func main() {
 		log.Println(err)
 	}
 
-	milestoneRepository, err := milestone.NewMilestoneRepository(model.Db)
+	milestoneRepository, err := repository.NewMilestoneRepository(model.Db)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -75,11 +71,11 @@ func main() {
 		log.Println(err)
 	}
 
-	taskRepository, err := task.NewTaskRepository(model.Db)
+	taskRepository, err := repository.NewTaskRepository(model.Db)
 	if err != nil {
 		log.Fatal(err)
 	}
-	taskAssignmentRepository, err := taskassignment.NewTaskAssignmentRepository(model.Db)
+	taskAssignmentRepository, err := repository.NewTaskAssignmentRepository(model.Db)
 	if err != nil {
 		log.Fatal(err)
 	}

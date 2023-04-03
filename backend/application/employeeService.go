@@ -9,11 +9,11 @@ import (
 )
 
 type EmployeeApplicationService struct {
-	employeeRepository employee.EmployeeRepositorier
+	employeeRepository employee.EmployeeRepository
 	employeeService    employee.EmployeeService
 }
 
-func NewEmployeeApplicationService(employeeRepository employee.EmployeeRepositorier, employeeService employee.EmployeeService) *EmployeeApplicationService {
+func NewEmployeeApplicationService(employeeRepository employee.EmployeeRepository, employeeService employee.EmployeeService) *EmployeeApplicationService {
 	return &EmployeeApplicationService{
 		employeeRepository: employeeRepository,
 		employeeService:    employeeService,

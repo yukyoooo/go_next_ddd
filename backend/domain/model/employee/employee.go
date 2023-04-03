@@ -17,7 +17,7 @@ func NewEmployee(name FullName, email Email, password Password, role enum.Role) 
 }
 
 func (e *Employee) WithChangeFirstName(firstName string) (_ *FullName, err error) {
-	changedFullName, err := NewFullName(firstName, e.Name.lastName)
+	changedFullName, err := NewFullName(firstName, e.Name.LastName)
 	if err != nil {
 		return nil, err
 	}
@@ -26,7 +26,7 @@ func (e *Employee) WithChangeFirstName(firstName string) (_ *FullName, err error
 }
 
 func (e *Employee) WithChangeLastName(lastName string) (_ *FullName, err error) {
-	changedFullName, err := NewFullName(e.Name.firstName, lastName)
+	changedFullName, err := NewFullName(e.Name.FirstName, lastName)
 	if err != nil {
 		return nil, err
 	}

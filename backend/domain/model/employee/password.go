@@ -8,7 +8,7 @@ import (
 )
 
 type Password struct {
-	value string
+	Value string
 }
 
 func NewPassword(value string) (_ *Password, err error) {
@@ -19,7 +19,7 @@ func NewPassword(value string) (_ *Password, err error) {
 		return nil, fmt.Errorf("password is required")
 	}
 
-	password.value = Encrypt(value)
+	password.Value = Encrypt(value)
 
 	return password, nil
 }

@@ -8,10 +8,10 @@ import (
 )
 
 type MilestoneApplicationService struct {
-	milestoneRepository milestone.MilestoneRepositorier
+	milestoneRepository milestone.MilestoneRepository
 }
 
-func NewMilestoneApplicationService(milestoneRepository milestone.MilestoneRepositorier) *MilestoneApplicationService {
+func NewMilestoneApplicationService(milestoneRepository milestone.MilestoneRepository) *MilestoneApplicationService {
 	return &MilestoneApplicationService{
 		milestoneRepository: milestoneRepository,
 	}
