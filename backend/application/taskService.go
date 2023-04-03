@@ -9,10 +9,10 @@ import (
 
 type TaskApplicationService struct {
 	taskRepository           task.TaskRepository
-	taskAssignmentRepository taskassignment.TaskAssignmentRepositorier
+	taskAssignmentRepository taskassignment.TaskAssignmentRepository
 }
 
-func NewTaskApplicationService(taskRepository task.TaskRepository, taskAssignmentRepository taskassignment.TaskAssignmentRepositorier) *TaskApplicationService {
+func NewTaskApplicationService(taskRepository task.TaskRepository, taskAssignmentRepository taskassignment.TaskAssignmentRepository) *TaskApplicationService {
 	return &TaskApplicationService{
 		taskRepository:           taskRepository,
 		taskAssignmentRepository: taskAssignmentRepository,
