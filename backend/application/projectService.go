@@ -10,10 +10,10 @@ import (
 
 type ProjectApplicationService struct {
 	projectRepository           project.ProjectRepository
-	projectAssignmentRepository projectassignment.ProjectAssignmentRepositorier
+	projectAssignmentRepository projectassignment.ProjectAssignmentRepository
 }
 
-func NewProjectApplicationService(projectRepository project.ProjectRepository, projectAssignmentRepository projectassignment.ProjectAssignmentRepositorier) *ProjectApplicationService {
+func NewProjectApplicationService(projectRepository project.ProjectRepository, projectAssignmentRepository projectassignment.ProjectAssignmentRepository) *ProjectApplicationService {
 	return &ProjectApplicationService{
 		projectRepository:           projectRepository,
 		projectAssignmentRepository: projectAssignmentRepository,

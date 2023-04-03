@@ -10,7 +10,6 @@ import (
 	"github.com/yukyoooo/go_next_ddd/application"
 	"github.com/yukyoooo/go_next_ddd/domain/model"
 	"github.com/yukyoooo/go_next_ddd/domain/model/employee"
-	projectassignment "github.com/yukyoooo/go_next_ddd/domain/model/projectAssignment"
 	"github.com/yukyoooo/go_next_ddd/domain/model/task"
 	taskassignment "github.com/yukyoooo/go_next_ddd/domain/model/taskAssignment"
 	"github.com/yukyoooo/go_next_ddd/infrastructure/repository"
@@ -56,7 +55,7 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
-	projectAssignmentRepository, err := projectassignment.NewProjectAssignmentRepository(model.Db)
+	projectAssignmentRepository, err := repository.NewProjectAssignmentRepository(model.Db)
 	if err != nil {
 		log.Fatal(err)
 	}
