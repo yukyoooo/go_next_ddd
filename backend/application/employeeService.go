@@ -57,3 +57,13 @@ func (eas *EmployeeApplicationService) Register(firstName string, lastName strin
 	log.Println("employee is successfully added in employees table. employee:", newEmployee)
 	return nil
 }
+
+func (eas *EmployeeApplicationService) GetEmployeeById(id int) (*employee.Employee, error) {
+	employee, err := eas.employeeRepository.FindById(id)
+	if err != nil {
+		return nil, err
+	}
+
+	log.Println("employee:", employee)
+	return employee, nil
+}

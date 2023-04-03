@@ -166,3 +166,4 @@ flowchart LR
 - [Cloud Build を使用した Git からの継続的なデプロイ](https://cloud.google.com/run/docs/continuous-deployment-with-cloud-build?hl=ja)
 - [GoでDDDの実装参考zenn記事](https://zenn.dev/msksgm)
 - [ポインタとアドレス](https://zenn.dev/genki86web/articles/a0ae1d57ad1806)
+- [go-ddd](https://mintaku-blog.net/go-ddd/)
