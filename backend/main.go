@@ -10,7 +10,6 @@ import (
 	"github.com/yukyoooo/go_next_ddd/application"
 	"github.com/yukyoooo/go_next_ddd/domain/model"
 	"github.com/yukyoooo/go_next_ddd/domain/model/employee"
-	"github.com/yukyoooo/go_next_ddd/domain/model/project"
 	projectassignment "github.com/yukyoooo/go_next_ddd/domain/model/projectAssignment"
 	"github.com/yukyoooo/go_next_ddd/domain/model/task"
 	taskassignment "github.com/yukyoooo/go_next_ddd/domain/model/taskAssignment"
@@ -53,7 +52,7 @@ func main() {
 		log.Printf("%s is not command. choose in ('register', 'get', 'update', 'delete')", *command)
 	}
 
-	projectRepository, err := project.NewProjectRepository(model.Db)
+	projectRepository, err := repository.NewProjectRepository(model.Db)
 	if err != nil {
 		log.Fatal(err)
 	}
