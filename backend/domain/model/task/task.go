@@ -2,22 +2,22 @@ package task
 
 type Task struct {
 	ID          int
-	projectID   int
-	milestoneID int
-	name        string
-	detail      string
-	status      int
-	url         string
+	ProjectID   int
+	MilestoneID int
+	Name        string
+	Detail      string
+	Status      int
+	Url         string
 }
 
 func NewTask(projectID int, milestoneID int, name string, detail string, status int, url string) (*Task, error) {
 	task := Task{
-		projectID:   projectID,
-		milestoneID: milestoneID,
-		name:        name,
-		detail:      detail,
-		status:      status,
-		url:         url,
+		ProjectID:   projectID,
+		MilestoneID: milestoneID,
+		Name:        name,
+		Detail:      detail,
+		Status:      status,
+		Url:         url,
 	}
 	return &task, nil
 }
@@ -27,21 +27,21 @@ func (t *Task) GetID() int {
 }
 
 func (t *Task) GetProjectID() int {
-	return t.projectID
+	return t.ProjectID
 }
 
 func (t *Task) GetMilestoneID() int {
-	return t.milestoneID
+	return t.MilestoneID
 }
 
 func (t *Task) GetName() string {
-	return t.name
+	return t.Name
 }
 
 func (t *Task) GetDetail() string {
-	return t.detail
+	return t.Detail
 }
 
 func (t *Task) GetStatus() int {
-	return t.status
+	return t.Status
 }

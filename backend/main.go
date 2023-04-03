@@ -10,7 +10,6 @@ import (
 	"github.com/yukyoooo/go_next_ddd/application"
 	"github.com/yukyoooo/go_next_ddd/domain/model"
 	"github.com/yukyoooo/go_next_ddd/domain/model/employee"
-	"github.com/yukyoooo/go_next_ddd/domain/model/task"
 	taskassignment "github.com/yukyoooo/go_next_ddd/domain/model/taskAssignment"
 	"github.com/yukyoooo/go_next_ddd/infrastructure/repository"
 	"golang.org/x/net/websocket"
@@ -73,7 +72,7 @@ func main() {
 		log.Println(err)
 	}
 
-	taskRepository, err := task.NewTaskRepository(model.Db)
+	taskRepository, err := repository.NewTaskRepository(model.Db)
 	if err != nil {
 		log.Fatal(err)
 	}
