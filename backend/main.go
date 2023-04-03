@@ -1,7 +1,6 @@
 package main
 
 import (
-	"flag"
 	"fmt"
 	"log"
 	"net/http"
@@ -13,8 +12,6 @@ import (
 	"github.com/yukyoooo/go_next_ddd/infrastructure/repository"
 	rest "github.com/yukyoooo/go_next_ddd/interface/handler"
 )
-
-var command = flag.String("usecase", "", "usercase of application")
 
 func main() {
 	fmt.Println(model.Db)
