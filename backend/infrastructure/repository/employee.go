@@ -12,8 +12,8 @@ type EmployeeRepository struct {
 	db *sql.DB
 }
 
-func NewEmployeeRepository(db *sql.DB) (*EmployeeRepository, error) {
-	return &EmployeeRepository{db: db}, nil
+func NewEmployeeRepository(db *sql.DB) *EmployeeRepository {
+	return &EmployeeRepository{db: db}
 }
 
 func (er *EmployeeRepository) Save(employee *employee.Employee) (err error) {

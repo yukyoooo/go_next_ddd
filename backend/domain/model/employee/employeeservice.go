@@ -4,8 +4,8 @@ type EmployeeService struct {
 	employeeRepository EmployeeRepository
 }
 
-func NewEmployeeService(employeeRepository EmployeeRepository) (*EmployeeService, error) {
-	return &EmployeeService{employeeRepository: employeeRepository}, nil
+func NewEmployeeService(employeeRepository EmployeeRepository) *EmployeeService {
+	return &EmployeeService{employeeRepository: employeeRepository}
 }
 
 func (es *EmployeeService) Exists(employee *Employee) (isExists bool, err error) {
