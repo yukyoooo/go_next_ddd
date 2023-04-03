@@ -66,7 +66,7 @@ func (er *EmployeeRepository) Remove(id int) (err error) {
 	return nil
 }
 
-func (er *EmployeeRepository) FindByNameAndEmail(firstName string, lastName string, email string) (employee *Employee, err error) {
+func (er *EmployeeRepository) FindByNameAndEmail(firstName string, lastName string, email string) (employee *employee.Employee, err error) {
 	tx, err := er.db.Begin()
 	if err != nil {
 		return
@@ -92,10 +92,10 @@ func (er *EmployeeRepository) FindByNameAndEmail(firstName string, lastName stri
 	for rows.Next() {
 		err := rows.Scan(
 			&employee.ID,
-			&employee.Name.firstName,
-			&employee.Name.lastName,
-			&employee.Email.value,
-			&employee.Password.value,
+			&employee.Name.FirstName,
+			&employee.Name.LastName,
+			&employee.Email.Value,
+			&employee.Password.Value,
 			&employee.Role)
 		if err != nil {
 			return nil, err

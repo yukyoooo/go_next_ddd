@@ -8,11 +8,11 @@ import (
 )
 
 type Email struct {
-	value string
+	Value string
 }
 
-func (e Email) Value() string {
-	return e.value
+func (e Email) GetValue() string {
+	return e.Value
 }
 
 func NewEmail(value string) (_ *Email, err error) {
@@ -26,7 +26,7 @@ func NewEmail(value string) (_ *Email, err error) {
 	if !validateEmail(value) {
 		return nil, fmt.Errorf("wrong format")
 	}
-	email.value = value
+	email.Value = value
 
 	return email, nil
 }

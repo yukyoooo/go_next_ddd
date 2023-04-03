@@ -8,8 +8,8 @@ import (
 )
 
 type FullName struct {
-	firstName string
-	lastName  string
+	FirstName string
+	LastName  string
 }
 
 func NewFullName(firstName string, lastName string) (_ *FullName, err error) {
@@ -22,7 +22,7 @@ func NewFullName(firstName string, lastName string) (_ *FullName, err error) {
 	if !ValidateName(firstName) {
 		return nil, fmt.Errorf("firstName has an invalid character, letter is only")
 	}
-	fullName.firstName = firstName
+	fullName.FirstName = firstName
 
 	if lastName == "" {
 		return nil, fmt.Errorf("lastName is required")
@@ -30,17 +30,17 @@ func NewFullName(firstName string, lastName string) (_ *FullName, err error) {
 	if !ValidateName(lastName) {
 		return nil, fmt.Errorf("lastName has an invalid character, letter is only")
 	}
-	fullName.lastName = lastName
+	fullName.LastName = lastName
 
 	return fullName, nil
 }
 
-func (fullName *FullName) FirstName() (firstName string) {
-	return fullName.firstName
+func (fullName *FullName) GetFirstName() (firstName string) {
+	return fullName.FirstName
 }
 
-func (fullName *FullName) LastName() (lastName string) {
-	return fullName.lastName
+func (fullName *FullName) GetLastName() (lastName string) {
+	return fullName.LastName
 }
 
 func ValidateName(value string) bool {

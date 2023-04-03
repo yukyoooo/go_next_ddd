@@ -15,6 +15,7 @@ import (
 	projectassignment "github.com/yukyoooo/go_next_ddd/domain/model/projectAssignment"
 	"github.com/yukyoooo/go_next_ddd/domain/model/task"
 	taskassignment "github.com/yukyoooo/go_next_ddd/domain/model/taskAssignment"
+	"github.com/yukyoooo/go_next_ddd/infrastructure/repository"
 	"golang.org/x/net/websocket"
 )
 
@@ -32,7 +33,7 @@ func main() {
 
 	// e.Logger.Fatal(e.Start(config.Config.Port)) // サーバーをポート番号で起動
 
-	employeeRepository, err := employee.NewEmployeeRepository(model.Db)
+	employeeRepository, err := repository.NewEmployeeRepository(model.Db)
 	if err != nil {
 		log.Fatal(err)
 	}
