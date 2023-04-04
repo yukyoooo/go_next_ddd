@@ -4,9 +4,9 @@ import styles from '../styles/Home.module.css'
 export async function getServerSideProps() {
   const url = process.env.NODE_ENV === 'production' 
     ? `https://${process.env.NEXT_PUBLIC_BACKEND_SERVER}:${process.env.NEXT_PUBLIC_PORT}`
-    : `http://localhost:8090`;
-  const {status} = await fetch(url + "/status").then(x => x.json());
-  const {username} = await fetch(url + "/username").then(x => x.json());
+    : `http://localhost:8090`
+  const {status} = await fetch(url + "/status").then(x => x.json())
+  const {username} = await fetch(url + "/username").then(x => x.json())
   return {
     props: {
       status: status,
