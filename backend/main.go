@@ -26,6 +26,8 @@ func main() {
 	router := httprouter.New()
 	router.POST("/api/employee", employeeHandler.Register)
 	router.GET("/api/employee/:id", employeeHandler.GetEmployee)
+	router.GET("/status", statusHandler)
+	router.GET("/username", usernameHandler)
 
 	http.ListenAndServe(":8090", &Server{router})
 	log.Fatal(http.ListenAndServe(":8090", router))
@@ -46,4 +48,20 @@ func (s *Server) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	w.Header().Add("Access-Control-Allow-Headers", "Accept-Language")
 	w.Header().Set("Content-Type", "application/json")
 	s.r.ServeHTTP(w, r)
+}
+
+func statusHandler(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
+	var resp = []byte(`{"status": "ok"}`)
+
+	w.Header().Set("Content-Type", "application/json")
+	w.Header().Set("Content-Length", fmt.Sprint(len(resp)))
+	w.Write(resp)
+}
+
+func usernameHandler(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
+	var resp = []byte(`{"username": "yukyoooo"}`)
+
+	w.Header().Set("Content-Type", "application/json")
+	w.Header().Set("Content-Length", fmt.Sprint(len(resp)))
+	w.Write(resp)
 }
