@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"log"
 	"net/http"
+	"os"
 
 	"github.com/julienschmidt/httprouter"
 	"github.com/yukyoooo/go_next_ddd/application"
@@ -27,12 +28,18 @@ func main() {
 	router := httprouter.New()
 	router.POST("/api/employee", employeeHandler.Register)
 	router.GET("/api/employee/:id", employeeHandler.GetEmployee)
-	router.GET("/status", statusHandler)
+	router.GET("/", statusHandler)
 	router.GET("/username", usernameHandler)
 
-	http.ListenAndServe(config.Config.Port, &Server{router})
-	log.Fatal(http.ListenAndServe(config.Config.Port, router))
-
+	/* サーバー起動 */
+	port := os.Getenv("PORT")
+	if port == "" {
+		port = config.Config.Port // ローカル環境ではデフォルトのポートを設定
+	}
+	log.Printf("Listening on %v", port)
+	if err := http.ListenAndServe(":"+port, router); err != nil {
+		log.Fatalf("Failed to start server: %v", err)
+	}
 }
 
 type Server struct {
