@@ -18,6 +18,8 @@ type SSRProps = {
 }
 
 const SSR: NextPage<SSRProps> = ({employee}: SSRProps) => {
+  if(!employee) return (<div>loading...</div>)
+
   return (
     <div className={styles.container}>
       <Head>
@@ -42,7 +44,8 @@ export const getServerSideProps: GetServerSideProps<SSRProps> = async () => {
   const context: ApiContext = {
     apiRootUrl: process.env.API_BASE_URL || 'http://localhost:8090',
   }
-  const employee = await getEmployee(context, { id: 1 })
+  let employee = await getEmployee(context, { id: 1 })
+  employee = null
   return {
     props: {
       employee,
