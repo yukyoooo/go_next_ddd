@@ -44,8 +44,7 @@ export const getServerSideProps: GetServerSideProps<SSRProps> = async () => {
   const context: ApiContext = {
     apiRootUrl: process.env.API_BASE_URL || 'http://localhost:8090',
   }
-  let employee = await getEmployee(context, { id: 1 })
-  employee = null
+  const employee = await getEmployee(context, { id: 1 })
   return {
     props: {
       employee,
