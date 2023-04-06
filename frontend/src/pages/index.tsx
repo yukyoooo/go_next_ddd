@@ -1,32 +1,24 @@
-import type { GetStaticProps, InferGetStaticPropsType, NextPage } from 'next'
 import Head from 'next/head'
 import styles from '../styles/Home.module.css'
-import getEmployee from '@/service/employee/get-employee'
-import { ApiContext } from '@/types'
+import { ApiContext } from '../types'
+import { GetServerSideProps, NextPage } from 'next'
+import { getEmployee } from '@/service/employee/get-employee'
 
-// export async function getServerSideProps() {
-//   const url =
-//     process.env.NODE_ENV === 'production'
-//       ? `https://${process.env.NEXT_PUBLIC_BACKEND_SERVER}:${process.env.NEXT_PUBLIC_PORT}`
-//       : `http://localhost:8090`
-//   const { status } = await fetch(url + '/status').then((x) => x.json())
-//   const { username } = await fetch(url + '/username').then((x) => x.json())
-//   return {
-//     props: {
-//       status: status,
-//       username: username,
-//     },
-//   }
-// }
+type SSRProps = {
+  employee: {
+    ID: number
+    Name: {
+      FirstName: string
+      LastName: string
+    }
+    Email: { Value: string }
+    Password: { Value: string }
+    Role: number
+  }
+}
 
-// type Props = {
-//   status: string
-//   username: string
-// }
-
-type HomePageProps = InferGetStaticPropsType<typeof getStaticProps>
-
-const HomePage: NextPage<HomePageProps> = ({ employee }: HomePageProps) => {
+const SSR: NextPage<SSRProps> = (props) => {
+  console.log(props.employee)
   return (
     <div className={styles.container}>
       <Head>
@@ -39,13 +31,15 @@ const HomePage: NextPage<HomePageProps> = ({ employee }: HomePageProps) => {
         <h1 className={styles.title}>
           Welcome to <a href='https://nextjs.org'>Next.js!</a>
         </h1>
-        <div>employee is: {employee.Name.FirstName}.</div>
+        <div>
+          Name is: {props.employee.Name.FirstName} {props.employee.Name.LastName}.
+        </div>
       </main>
     </div>
   )
 }
 
-export const getStaticProps: GetStaticProps = async () => {
+export const getServerSideProps: GetServerSideProps<SSRProps> = async () => {
   const context: ApiContext = {
     apiRootUrl: process.env.API_BASE_URL || 'http://localhost:8090',
   }
@@ -57,4 +51,4 @@ export const getStaticProps: GetStaticProps = async () => {
   }
 }
 
-export default HomePage
+export default SSR
