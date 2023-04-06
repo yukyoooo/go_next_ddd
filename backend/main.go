@@ -7,6 +7,7 @@ import (
 
 	"github.com/julienschmidt/httprouter"
 	"github.com/yukyoooo/go_next_ddd/application"
+	"github.com/yukyoooo/go_next_ddd/config"
 	"github.com/yukyoooo/go_next_ddd/domain/model"
 	"github.com/yukyoooo/go_next_ddd/domain/model/employee"
 	"github.com/yukyoooo/go_next_ddd/infrastructure/repository"
@@ -29,8 +30,8 @@ func main() {
 	router.GET("/status", statusHandler)
 	router.GET("/username", usernameHandler)
 
-	http.ListenAndServe(":8090", &Server{router})
-	log.Fatal(http.ListenAndServe(":8090", router))
+	http.ListenAndServe(config.Config.Port, &Server{router})
+	log.Fatal(http.ListenAndServe(config.Config.Port, router))
 
 }
 
