@@ -17,8 +17,7 @@ type SSRProps = {
   }
 }
 
-const SSR: NextPage<SSRProps> = (props) => {
-  console.log(props.employee)
+const SSR: NextPage<SSRProps> = ({employee}: SSRProps) => {
   return (
     <div className={styles.container}>
       <Head>
@@ -32,7 +31,7 @@ const SSR: NextPage<SSRProps> = (props) => {
           Welcome to <a href='https://nextjs.org'>Next.js!</a>
         </h1>
         <div>
-          Name is: {props.employee.Name.FirstName} {props.employee.Name.LastName}.
+          Name is: {employee.Name.FirstName} {employee.Name.LastName}.
         </div>
       </main>
     </div>
