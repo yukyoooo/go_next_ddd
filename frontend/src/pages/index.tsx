@@ -1,8 +1,13 @@
 import Head from 'next/head'
-import styles from '../styles/Home.module.css'
 import { ApiContext } from '../types'
 import { GetServerSideProps, NextPage } from 'next'
 import { getEmployee } from '@/service/employee/get-employee'
+import styles from '../styles/Home.module.css'
+import styled from 'styled-components'
+
+const H1 = styled.h1`
+  color: red;
+`
 
 type SSRProps = {
   employee: {
@@ -17,8 +22,8 @@ type SSRProps = {
   }
 }
 
-const SSR: NextPage<SSRProps> = ({employee}: SSRProps) => {
-  if(!employee) return (<div>loading...</div>)
+const SSR: NextPage<SSRProps> = ({ employee }: SSRProps) => {
+  if (!employee) return <div>loading...</div>
 
   return (
     <div className={styles.container}>
@@ -29,9 +34,9 @@ const SSR: NextPage<SSRProps> = ({employee}: SSRProps) => {
       </Head>
 
       <main className={styles.main}>
-        <h1 className={styles.title}>
+        <H1 className={styles.title}>
           Welcome to <a href='https://nextjs.org'>Next.js!</a>
-        </h1>
+        </H1>
         <div>
           Name is: {employee.Name.FirstName} {employee.Name.LastName}.
         </div>
