@@ -11,6 +11,7 @@ module.exports = {
     'next/core-web-vitals',
     'google',
     'prettier',
+    'plugin:storybook/recommended',
   ],
   parser: '@typescript-eslint/parser',
   parserOptions: {
