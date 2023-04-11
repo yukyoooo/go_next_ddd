@@ -27,7 +27,6 @@ module.exports = {
   plugins: ['react', 'react-hooks', '@typescript-eslint', 'eslint-plugin-prettier', 'prettier'],
   rules: {
     'react/react-in-jsx-scope': 'off',
-    'import/order': [2, { alphabetize: { order: 'asc' } }],
     'prettier/prettier': [
       'error',
       {
