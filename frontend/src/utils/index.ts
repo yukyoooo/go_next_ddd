@@ -14,3 +14,5 @@ export const fetcher = async (
 
   return res.json()
 }
+
+export * from './styles'

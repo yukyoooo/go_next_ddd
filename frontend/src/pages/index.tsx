@@ -1,9 +1,9 @@
-import Head from 'next/head'
-import { ApiContext } from '../types'
 import { GetServerSideProps, NextPage } from 'next'
-import { getEmployee } from '@/service/employee/get-employee'
-import styles from '../styles/Home.module.css'
+import Head from 'next/head'
 import styled from 'styled-components'
+import { getEmployee } from '../service/employee/get-employee'
+import styles from '../styles/Home.module.css'
+import { ApiContext } from '../types'
 
 const H1 = styled.h1`
   color: red;
@@ -33,7 +33,7 @@ const SSR: NextPage<SSRProps> = ({ employee }: SSRProps) => {
         <link rel='icon' href='/favicon.ico' />
       </Head>
 
-      <main className={styles.main}>
+      <main>
         <H1 className={styles.title}>
           Welcome to <a href='https://nextjs.org'>Next.js!</a>
         </H1>
