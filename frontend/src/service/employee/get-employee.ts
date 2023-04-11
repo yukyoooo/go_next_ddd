@@ -1,5 +1,5 @@
-import { fetcher } from '../../utils'
 import { ApiContext } from '../../types'
+import { fetcher } from '../../utils'
 
 export type GetEmployeeParams = {
   id: number
