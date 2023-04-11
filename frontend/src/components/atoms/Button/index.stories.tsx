@@ -17,41 +17,41 @@ export default {
         defaultValue: { summary: 'primary' },
       },
     },
-  },
-  children: {
-    control: { type: 'text' },
-    defaultValue: 'ボタン',
-    description: 'ボタンのラベル',
-    table: {
-      type: { summary: 'string' },
+    children: {
+      control: { type: 'text' },
+      defaultValue: 'ボタン',
+      description: 'ボタンのラベル',
+      table: {
+        type: { summary: 'string' },
+      },
     },
-  },
-  disabled: {
-    control: { type: 'boolean' },
-    defaultValue: false,
-    description: 'ボタンを無効化する',
-    table: {
-      type: { summary: 'boolean' },
+    disabled: {
+      control: { type: 'boolean' },
+      defaultValue: false,
+      description: 'ボタンを無効化する',
+      table: {
+        type: { summary: 'boolean' },
+      },
     },
-  },
-  width: {
-    control: { type: 'number' },
-    description: 'ボタンの横幅',
-    table: {
-      type: { summary: 'number' },
+    width: {
+      control: { type: 'number' },
+      description: 'ボタンの横幅',
+      table: {
+        type: { summary: 'number' },
+      },
     },
-  },
-  height: {
-    control: { type: 'number' },
-    description: 'ボタンの縦幅',
-    table: {
-      type: { summary: 'number' },
+    height: {
+      control: { type: 'number' },
+      description: 'ボタンの縦幅',
+      table: {
+        type: { summary: 'number' },
+      },
     },
-  },
-  onClick: {
-    description: 'ボタンをクリックしたときのイベント',
-    table: {
-      type: { summary: '() => void' },
+    onClick: {
+      description: 'ボタンをクリックしたときのイベント',
+      table: {
+        type: { summary: '() => void' },
+      },
     },
   },
 } as ComponentMeta<typeof Button>
