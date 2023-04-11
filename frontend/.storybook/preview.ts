@@ -1,8 +1,5 @@
-import { createGlobalStyle, ThemeProvider } from 'styled-components'
-import { theme } from '../src/themes'
+import { createGlobalStyle } from 'styled-components'
 import * as NextImage from 'next/image'
-
-
 
 export const parameters = {
   actions: { argTypesRegex: '^on[A-Z].*' },
@@ -32,4 +29,3 @@ export const GlobalStyle = createGlobalStyle`
     color: #000000;
   }
 `
-
