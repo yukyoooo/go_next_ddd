@@ -1,39 +1,39 @@
 /* eslint-disable prettier/prettier */
 import styled from 'styled-components'
 import type {
-    Responsive,
-    CSSPropertyAlignItems,
-    CSSPropertyAlignContent,
-    CSSPropertyJustifyContent,
-    CSSPropertyJustifyItems,
-    CSSPropertyFlexDirection,
-    CSSPropertyJustifySelf,
-    CSSPropertyFlexWrap,
-    CSSPropertyAlignSelf,
+  Responsive,
+  CSSPropertyAlignItems,
+  CSSPropertyAlignContent,
+  CSSPropertyJustifyContent,
+  CSSPropertyJustifyItems,
+  CSSPropertyFlexDirection,
+  CSSPropertyJustifySelf,
+  CSSPropertyFlexWrap,
+  CSSPropertyAlignSelf,
 } from 'types/styles'
 import { toPropValue } from '../../../utils/styles'
 import Box, { BoxProps } from '../Box'
 
 type FlexProps = BoxProps & {
-    alignItems?: Responsive<CSSPropertyAlignItems>
-    alignContent?: Responsive<CSSPropertyAlignContent>
-    justifyContent?: Responsive<CSSPropertyJustifyContent>
-    justifyItems?: Responsive<CSSPropertyJustifyItems>
-    flexWrap?: Responsive<CSSPropertyFlexWrap>
-    flexBasis?: Responsive<string>
-    flexDirection?: Responsive<CSSPropertyFlexDirection>
-    flexGrow?: Responsive<string>
-    flexShrink?: Responsive<string>
-    justifySelf?: Responsive<CSSPropertyJustifySelf>
-    alignSelf?: Responsive<CSSPropertyAlignSelf>
-    order?: Responsive<string>
+  alignItems?: Responsive<CSSPropertyAlignItems>
+  alignContent?: Responsive<CSSPropertyAlignContent>
+  justifyContent?: Responsive<CSSPropertyJustifyContent>
+  justifyItems?: Responsive<CSSPropertyJustifyItems>
+  flexWrap?: Responsive<CSSPropertyFlexWrap>
+  flexBasis?: Responsive<string>
+  flexDirection?: Responsive<CSSPropertyFlexDirection>
+  flexGrow?: Responsive<string>
+  flexShrink?: Responsive<string>
+  justifySelf?: Responsive<CSSPropertyJustifySelf>
+  alignSelf?: Responsive<CSSPropertyAlignSelf>
+  order?: Responsive<string>
 }
 
 /**
  * Flexコンポーネント
  * flexboxの実現に利用する
  */
-const Flex = styled(Box) <FlexProps>`
+const Flex = styled(Box)<FlexProps>`
   ${(props) => toPropValue('align-items', props.alignItems, props.theme)}
   ${(props) => toPropValue('align-content', props.alignContent, props.theme)}
   ${(props) => toPropValue('justify-content', props.justifyContent, props.theme)}
@@ -49,7 +49,7 @@ const Flex = styled(Box) <FlexProps>`
 `
 
 Flex.defaultProps = {
-    display: 'flex',
+  display: 'flex',
 }
 
 export default Flex
