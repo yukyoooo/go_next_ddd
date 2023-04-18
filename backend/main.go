@@ -26,8 +26,8 @@ func main() {
 
 	/* ルーティング */
 	router := httprouter.New()
-	router.POST("/api/employee", employeeHandler.Register)
-	router.GET("/api/employee/:id", employeeHandler.GetEmployee)
+	router.POST("/employee", employeeHandler.Register)
+	router.GET("/employee/:id", employeeHandler.GetEmployee)
 	router.GET("/", statusHandler)
 	router.GET("/username", usernameHandler)
 
