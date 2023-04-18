@@ -6,6 +6,6 @@ export type GetEmployeeParams = {
 }
 
 export const getEmployee = async (context: ApiContext, { id }: GetEmployeeParams) => {
-  const res = await fetcher(`${context.apiRootUrl.replace(/\/$/g, '')}/api/employee/${id}`)
+  const res = await fetcher(`${context.apiRootUrl.replace(/\/$/g, '')}/employee/${id}`)
   return res
 }
