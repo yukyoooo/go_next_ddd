@@ -4,6 +4,7 @@ import styled from 'styled-components'
 import { getEmployee } from '../services/employee/get-employee'
 import { ApiContext } from '../types'
 import Button from '../components/atoms/Button'
+import React from 'react'
 
 const H1 = styled.h1`
   color: red;
