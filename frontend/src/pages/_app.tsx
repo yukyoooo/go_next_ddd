@@ -1,12 +1,13 @@
 import { AppProps } from 'next/app'
 import Head from 'next/head'
+import React from 'react'
 import { createGlobalStyle, ThemeProvider } from 'styled-components'
 import { SWRConfig } from 'swr'
 import GlobalSpinner from '../components/organisms/GlobalSpinner'
 import { AuthContextProvider } from '../contexts/AuthContext'
 import GlobalSpinnerContextProvider from '../contexts/GlobalSpinnerContext'
 import { theme } from '../themes'
-import type { ApiContext } from 'types'
+import type { ApiContext } from '../types'
 import { fetcher } from '../utils'
 
 // グローバルのスタイル

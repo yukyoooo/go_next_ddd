@@ -1,3 +1,4 @@
+import React from 'react'
 import styled from 'styled-components'
 import Spinner from '../../../components/atoms/Spinner'
 import { useGlobalSpinnerContext } from '../../../contexts/GlobalSpinnerContext'

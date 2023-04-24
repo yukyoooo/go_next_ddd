@@ -16,8 +16,11 @@
   "dependencies": {
     "@emotion/react": "^11.10.6",
     "@emotion/styled": "^11.10.6",
+    "@fontsource/roboto": "^4.5.8",
+    "@material-ui/core": "^4.12.4",
     "@mui/icons-material": "^5.11.16",
-    "@mui/material": "^5.12.0",
+    "@mui/material": "^5.12.1",
+    "@mui/styled-engine-sc": "^5.12.0",
     "@types/node": "18.15.0",
     "@types/react-dom": "18.0.11",
     "eslint": "8.35.0",
@@ -27,7 +30,7 @@
     "react-content-loader": "^6.2.1",
     "react-dom": "18.2.0",
     "react-hook-form": "^7.43.9",
-    "styled-components": "^5.3.9",
+    "styled-components": "^5.3.10",
     "swr": "^2.1.2",
     "typescript": "4.9.5"
   },

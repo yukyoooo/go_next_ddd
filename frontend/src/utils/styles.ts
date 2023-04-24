@@ -1,8 +1,7 @@
-/* eslint-disable valid-jsdoc */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/ban-types */
-import type { ResponsiveProp, Responsive } from 'types'
 import { theme } from '../themes'
+import type { ResponsiveProp, Responsive } from '../types'
 
 // Themeの型
 export type AppTheme = typeof theme
@@ -33,13 +32,13 @@ const BREAKPOINTS: { [key: string]: string } = {
  * @param propKey CSSプロパティ
  * @param prop Responsive型
  * @param theme AppTheme
- * @return CSSプロパティとその値 (ex. background-color: white;)
+ * @returns CSSプロパティとその値 (ex. background-color: white;)
  */
 export function toPropValue<T>(propKey: string, prop?: Responsive<T>, theme?: AppTheme) {
   if (prop === undefined) return undefined
 
   if (isResponsivePropType(prop)) {
-    const result = []
+    const result: string[] = []
     for (const responsiveKey in prop) {
       if (responsiveKey === 'base') {
         // デフォルトのスタイル
@@ -84,7 +83,7 @@ const LINE_HEIGHT_KEYS = new Set(['line-height'])
  * @param propKey CSSプロパティ
  * @param value CSSプロパティの値
  * @param theme AppTheme
- * @return CSSプロパティの値
+ * @returns CSSプロパティの値
  */
 function toThemeValueIfNeeded<T>(propKey: string, value: T, theme?: AppTheme) {
   if (theme && theme.space && SPACE_KEYS.has(propKey) && isSpaceThemeKeys(value, theme)) {
