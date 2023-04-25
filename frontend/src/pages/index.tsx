@@ -5,7 +5,7 @@ import { getEmployee } from '../services/employee/get-employee'
 import { ApiContext } from '../types'
 import Button from '../components/atoms/Button'
 import React from 'react'
-import SimpleAccordion from '../components/organisms/ProjectCard'
+import ProjectCard from '../components/organisms/ProjectCard'
 
 const H1 = styled.h1`
   color: red;
@@ -44,7 +44,9 @@ const SSR: NextPage<SSRProps> = ({ employee }: SSRProps) => {
         <Title>
           Name is: {employee.Name.FirstName} {employee.Name.LastName}.
         </Title>
-        <SimpleAccordion />
+        <ProjectCard />
+        <ProjectCard />
+        <ProjectCard />
         <Button>Todo</Button>
       </main>
     </div>
