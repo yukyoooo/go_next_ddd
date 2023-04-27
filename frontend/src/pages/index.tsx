@@ -6,6 +6,7 @@ import { ApiContext } from '../types'
 import Button from '../components/atoms/Button'
 import React from 'react'
 import ProjectCard from '../components/organisms/ProjectCard'
+import { Grid } from '@mui/material'
 
 const H1 = styled.h1`
   color: red;
@@ -14,6 +15,7 @@ const H1 = styled.h1`
 const Title = styled.h1`
   font-size: ${({ theme }) => theme.fontSizes[4]};
   color: ${({ theme }) => theme.colors.primary};
+  text-align: center;
 `
 
 type SSRProps = {
@@ -40,14 +42,30 @@ const SSR: NextPage<SSRProps> = ({ employee }: SSRProps) => {
         <link rel='icon' href='/favicon.ico' />
       </Head>
 
-      <main>
+      <main style={{ width: '100%' }}>
         <Title>
           Name is: {employee.Name.FirstName} {employee.Name.LastName}.
         </Title>
-        <ProjectCard />
-        <ProjectCard />
-        <ProjectCard />
-        <Button>Todo</Button>
+        <Grid container spacing={2} columns={16}>
+          <Grid item xs={7}>
+            <Button>Todo</Button>
+          </Grid>
+          <Grid
+            item
+            xs={8}
+            sx={{
+              bgcolor: 'gray',
+              borderRadius: 3,
+              p: 1,
+              m: 5,
+            }}
+          >
+            <ProjectCard />
+            <ProjectCard />
+            <ProjectCard />
+          </Grid>
+        </Grid>
+        <div></div>
       </main>
     </div>
   )
