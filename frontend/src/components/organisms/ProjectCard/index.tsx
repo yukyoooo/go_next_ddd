@@ -18,7 +18,7 @@ const bull = (
 
 export default function ProjectCard() {
   return (
-    <Card sx={{ maxWidth: 400, m: 5 }}>
+    <Card sx={{ maxWidth: '90%', m: 5 }}>
       <CardContent>
         <Typography sx={{ fontSize: 14 }} color='text.secondary' gutterBottom>
           Project
